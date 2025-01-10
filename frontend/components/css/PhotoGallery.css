@@ -1,0 +1,182 @@
+/* Container for the entire component */
+.photoGallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    position: relative; /* Ensure the overlay is positioned relative to this container */
+    color: white;
+    /* background-color: rgba(34, 7, 242, 0.597); */
+  }
+  
+  /* Background image with opacity overlay */
+  .photoGallery-container::before {
+    content: ""; /* Create an empty pseudo-element */
+    position: absolute; /* Position overlay absolutely */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../public/images/PhotoGallery/GalleryImage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the container, cropping if necessary */
+    background-position: center; /* Center the image */
+  
+    opacity: 0.9; /*Adjust opacity of the background image  */
+    z-index: -1; /*Place the overlay behind the content */
+    
+  }
+  
+  /* Title styling */
+  .photoGallery-title {
+    padding: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
+    /* margin-bottom: 1rem; */
+  }
+  
+  /* Container for the carousel */
+  .photoGallery-carousel {
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Container for sliding content */
+  .photoGallery-content {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+  }
+  
+  /* Each item in the carousel */
+  .photoGallery-item {
+    flex: 1 0 33.333%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  
+  /* Styling for icons */
+  
+  /* Container for the image with stacked photo effect */
+  .photoGallery-icon {
+    position: relative;
+    width: 150px; /* Decrease width */
+    height: 150px; /* Decrease height */
+    margin-bottom: 2.5rem; /* Reduce margin */
+    border: 8px solid white; /* Decrease border size */
+    box-shadow: 3px 3px 3px grey; /* Decrease shadow size */
+    overflow: visible; /* Ensure the stack elements are visible */
+  }
+  
+  /* First background layer */
+  .photoGallery-icon::before {
+    content: "";
+    position: absolute;
+    top: -20px; /* Increase offset slightly */
+    left: -20px; /* Increase offset slightly */
+    width: 160px; /* Decrease width */
+    height: 160px; /* Decrease height */
+    background-color: rgb(128, 128, 128);
+    border: 8px solid white; /* Decrease border size */
+    transform: rotate(-15deg);
+    box-shadow: 3px 2px 3px #2f29635a; /* Decrease shadow size */
+    z-index: -1;
+  }
+  
+  /* Second background layer */
+  .photoGallery-icon::after {
+    content: "";
+    position: absolute;
+    top: 5px; /* Adjust offset */
+    left: 5px; /* Adjust offset */
+    width: 150px; /* Decrease width */
+    height: 150px; /* Decrease height */
+    background-color: #808000;
+    border: 8px solid white; /* Decrease border size */
+    transform: rotate(10deg);
+    box-shadow: 3px 2px 3px #2f29635a; /* Decrease shadow size */
+    z-index: -2;
+  }
+  .photoGallery-data h2 {
+    font-size: 1.2rem; /* Decrease font size */
+  }
+  
+  .photoGallery-data p {
+    font-size: 0.9rem; /* Decrease font size */
+  }
+  
+  /* Adjust pagination button sizes */
+  .photoGallery-pagination-button {
+    height: 30px; /* Decrease height */
+    width: 30px; /* Decrease width */
+  }
+  
+  .photoGallery-pagination-button svg {
+    width: 15px; /* Decrease SVG size */
+    height: 15px; /* Decrease SVG size */
+  }
+  
+  .photoGallery-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  
+  /* Styling for data below the icon */
+  .photoGallery-data {
+    text-align: center;
+  }
+  
+  /* Heading styling */
+  /* .photoGallery-data h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  } */
+  
+  /* Paragraph styling */
+  /* .photoGallery-data p {
+    font-size: 1rem;
+    margin-bottom: 0;
+  } */
+  
+  /* Pagination buttons container */
+  .photoGallery-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    /* margin-top: 1rem; */
+    padding: 0.5rem;
+  }
+  
+  
+  .photoGallery-pagination-button {
+    background-color: #2f29635a; /* Set the background color */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Pointer cursor on hover */
+    color: white; /* Text color */
+    height: 40px; /* Adjust height for better size */
+    width: 40px; /* Adjust width for better size */
+    border-radius: 50% ; /* Make the button circular */
+    display: flex; /* Use flexbox for centering the SVG */
+    align-items: center; /* Vertically center the SVG */
+    justify-content: center; /* Horizontally center the SVG */
+    transition: background-color 0.3s; /* Smooth color transition on hover */
+    border: 1px solid #fff;
+  }
+  
+  .photoGallery-pagination-button svg {
+    width: 20px; /* Adjust the size of the SVG */
+    height: 20px; /* Adjust the size of the SVG */
+  }
+  
+  .photoGallery-pagination-button:hover {
+    background-color: #2f2963; /* Change color on hover */
+  }
+  /* Media Queries */

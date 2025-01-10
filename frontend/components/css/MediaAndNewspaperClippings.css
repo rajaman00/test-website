@@ -1,0 +1,206 @@
+.container1 {
+    display: flex;
+    margin:auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Add shadow border */
+    border-radius: 10px; /* Optional: Add rounded corners */
+  /* background-color: aquamarine; */
+  padding: 20px;
+  animation: fadeUp 1s ease-in-out;
+  }
+  
+  
+  .section {
+    flex: 1; /* Take up available space */
+    overflow: hidden; /* Hide any overflow */
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    /* min-height: 500px; */
+    position: relative; /* For absolute positioning of the button */
+    /* background-color: aqua; */
+  }
+  
+  .separator {
+    width: 2px; /* Thickness of the separator */
+    background-color: #ddd; /* Color of the separator */
+    height: 400px; /* Match the fixed height of the sections */
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .button.active {
+    background-color: #2f2963;
+    color: #fff;
+  }
+  
+  .content-container {
+    flex: 1;
+    /* overflow-y: auto;  */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    padding-bottom: 40px; /* Add space for the button */
+    margin-bottom: 2rem;
+  }
+  
+  .content {
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    max-height: 250px; /* Set fixed height */
+    /* overflow-y: auto;  */
+    padding-bottom: 60px; /* Add space for the button */
+  
+    flex-grow: 1; /* Allow content to grow and take up available space */
+    /* background-color: #2f2963; */
+    margin-top: 0.5rem;
+  }
+  
+  .rowData {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* margin-bottom: 10px; */
+    margin: 12px 0px;
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
+      /* background-color: aqua; */
+  }
+  
+  .document-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    flex-shrink: 0; /* Prevent the icon from shrinking */
+  }
+  
+  .document-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .details-header {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .view-more-button {
+    background-color: transparent; /* Initial background color */
+    color: #2f2963; /* Text color */
+    border: 2px solid #2f2963; /* Border color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s; /* Transition for smooth change */
+    position: absolute; /* Position at the bottom */
+    bottom: 2px; /* 2 px from the bottom of the section */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+  }
+  
+  .view-more-button:hover {
+    background-color: #2f2963; /* Hover background color */
+    color: #fff; /* Hover text color */
+  }
+  
+  .details-container {
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  .details-container p {
+    margin: 0;
+    color: #6d6d6b;
+  }
+  
+  .details-container .verticalSeparator{
+    margin: 0 15px;
+    color: #000;
+  }
+
+/* MediaAndNewspaperClippings.css */
+
+
+/* MediaAndNewspaperClippings.css */
+.image {
+  width: 200px; /* Fixed width for uniformity */
+  height: 230px; /* Fixed height for uniformity */
+  object-fit: cover; /* Ensures images maintain aspect ratio and fill the area */
+  border-radius: 5px; /* Adds rounded corners */
+  margin-right: 20px; /* Adds space between images */
+    flex-wrap: 'wrap'; 
+  overflow-x: 'hidden';
+  /* border: 2px solid rgb(12, 12, 12);  */
+}
+
+
+
+
+  
+  /************************************************     Responsive code     **********************************************************/
+  @media  (max-width: 1194px) {
+    .container1{
+      flex-direction: column;
+      margin:30px;
+    }
+    .separator{
+     width:100%;
+     height:2px;
+    }
+  } 
+  
+  
+  @media (max-width:747px) {
+    .details-container .verticalSeparator{
+      display: none;    
+    }
+    .details-container {
+      display: flex;
+      align-items:flex-start;
+     flex-direction: column;
+     justify-content: left;
+    }
+  }
+  
+  
+  @media (max-width:625px) {
+    .tenders{
+    margin-top: 5rem;
+    margin-left: 2rem;
+    margin-bottom: 4rem;
+    margin-right: .5rem;
+  } 
+  .button-container { 
+    flex-wrap: wrap;
+  }
+  .document-icon {
+    display: none;
+  }
+  
+  }

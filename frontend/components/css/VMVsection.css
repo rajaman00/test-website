@@ -1,0 +1,376 @@
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.parentVMV {
+  position: relative;
+  overflow: hidden;
+  /* Ensures the background stays within the parent */
+}
+
+.background-image {
+  background-image: url('images/VMVbackground.jpg');
+  /* background-size: cover; */
+  background-position: 0% 50%; 
+  /* Start position */
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  /* Adjust the opacity here */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  /* Ensure it is below the content */
+  animation: moveBackground 800s linear infinite;
+  /* padding: 2rem; */
+  margin: 2rem;
+  margin-bottom: -5rem;
+}
+
+.VMV {
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 2rem;
+  position: relative;
+  /* To ensure proper stacking context */
+  z-index: 2;
+  /* Ensure it is above the background image */
+}
+
+.mission,
+.value {
+  padding-left: 1rem;
+  margin-left: 1rem;
+  border-left: 2px double #ddd;
+  text-align: center;
+}
+
+.vision {
+  width: 30%;
+  text-align: center;
+}
+
+.mission {
+  width: 40%;
+}
+
+.value {
+  width: 30%;
+}
+
+ul {
+  padding-left: 1.2rem !important;
+}
+
+.text-header-container {
+  position: relative;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.text-header {
+  text-align: center;
+  font-style: italic;
+  font-size: 3rem;
+  font-family: 'Brush Script MT', cursive;
+  color: #2f2963;
+  /* Text color */
+  padding: 1rem;
+}
+
+.text-header::before,
+.text-header::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: #2f2963;
+  transform: translateY(-50%);
+}
+
+.text-header::before {
+  left: 0;
+}
+
+.text-header::after {
+  right: 0;
+}
+
+.text-content {
+  flex: 1;
+  color: #333;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  padding: 1rem;
+  font-family: "Times New Roman", Times, serif;
+  text-align: justify;
+}
+
+/************************************************     Responsive code     **********************************************************/
+@media (max-width:1857px) {
+  .background-image {
+    margin-bottom: -6.8rem;
+  }
+}
+
+@media (max-width:1794px) {
+  .background-image {
+    margin-bottom: -8.6rem;
+  }
+}
+
+@media (max-width:1521px) {
+  .background-image {
+    margin-bottom: -10.5rem;
+  }
+
+  .text-header::before,
+  .text-header::after {
+    width: 25%;
+  }
+}
+
+@media (max-width:1487px) {
+  .background-image {
+    margin-bottom: -12.3rem;
+  }
+
+  .text-header::before,
+  .text-header::after {
+    width: 25%;
+  }
+}
+
+@media (max-width:1391px) {
+  .background-image {
+    margin-bottom: -14rem;
+  }
+}
+
+@media (max-width:1340px) {
+  .background-image {
+    margin-bottom: -15.8rem;
+  }
+
+  .text-header::before,
+  .text-header::after {
+    width: 23%;
+  }
+}
+
+@media (max-width:1321px) {
+  .background-image {
+    margin-bottom: -17.8rem;
+  }
+
+  .text-header::before,
+  .text-header::after {
+    width: 21%;
+  }
+}
+
+@media (max-width:1267px) {
+  .background-image {
+    margin-bottom: -19.5rem;
+  }
+
+  .text-header::before,
+  .text-header::after {
+    width: 18%;
+  }
+}
+
+@media (max-width:1205px) {
+  .background-image {
+    margin-bottom: -21.1rem;
+  }
+}
+
+@media (max-width:1184px) {
+  .background-image {
+    margin-bottom: -23.1rem;
+  }
+}
+
+@media (max-width:1141px) {
+  .background-image {
+    margin-bottom: -24.8rem;
+  }
+
+  .text-header::before,
+  .text-header::after {
+    width: 0%;
+  }
+}
+
+@media (max-width:1069px) {
+  .background-image {
+    margin-bottom: -26.5rem;
+  }
+}
+
+@media (max-width:1061px) {
+  .background-image {
+    margin-bottom: -28.5rem;
+  }
+}
+
+@media (max-width:1023px) {
+  .background-image {
+    margin-bottom: -30.1rem;
+  }
+}
+
+@media (max-width:1004px) {
+  .background-image {
+    margin-bottom: -32rem;
+  }
+}
+
+@media (max-width:990px) {
+  .background-image {
+    margin-bottom: -33.8rem;
+  }
+}
+
+@media (max-width:970px) {
+  .background-image {
+    margin-bottom: -35.5rem;
+  }
+}
+
+@media (max-width:958px) {
+  .background-image {
+    margin-bottom: -37.5rem;
+  }
+}
+
+@media (max-width:946px) {
+  .background-image {
+    margin-bottom: -39.1rem;
+  }
+}
+
+@media (max-width:944px) {
+  .background-image {
+    margin-bottom: -43rem;
+  }
+}
+
+@media (max-width:941px) {
+  .background-image {    
+      opacity: 0;
+  }
+
+  .VMV {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .text-header::before,
+  .text-header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 25%;
+    height: 1px;
+    background: #2f2963;
+    transform: translateY(-50%);
+  }
+
+  .vision {
+    width: 100%;
+  }
+
+  .mission {
+    width: 100%;
+  }
+
+  .value {
+    width: 100%;
+  }
+
+  .mission,
+  .value {
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 2px double #ddd;
+    text-align: center;
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+ 
+  
+}
+
+@media (max-width:625px) {
+  .text-header::before,
+  .text-header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 25%;
+    height: 1px;
+    background: #2f2963;
+    transform: translateY(-50%);
+  }
+  .VMVsection{
+    margin-top: 5rem;
+    overflow: hidden;
+    /*added later on*/
+    margin-left: 2rem;
+    margin-bottom: 4rem;
+    margin-right: .5rem;
+  }
+
+ 
+}
+@media (max-width:499px) {
+  .text-header::before,
+  .text-header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20%;
+    height: 1px;
+    background: #2f2963;
+    transform: translateY(-50%);
+  }
+  .VMV {
+    margin-right: 0.5rem;
+  }
+  .VMVsection{
+    margin-top: 5rem;
+    overflow: hidden;
+    /*added later on*/
+    margin-left: 2rem;
+    margin-bottom: 4rem;
+    margin-right: 0;
+  }
+ 
+
+}
+@media (max-width:415px) {
+  .text-header::before,
+.text-header::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 0%;
+  height: 1px;
+  background: #2f2963;
+  transform: translateY(-50%);
+}
+}

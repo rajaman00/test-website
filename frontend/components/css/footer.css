@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    
+}
+
+.footer1 {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #3c3c3c;
+    color: white;
+    height: 16rem;
+    padding-top: 2rem;
+}
+.footer1 div{
+    width: 33%;
+}
+
+.footer1 h4 {
+    color: #f7df1e;
+}
+
+.footer1 a {
+    color:white;
+    text-decoration: none;
+}
+
+.footer1 a:hover {
+    text-decoration: underline;
+}
+
+.footer1 .contact-info p {
+    margin: 0;
+}
+
+.others{
+    padding-left: 7rem;
+}

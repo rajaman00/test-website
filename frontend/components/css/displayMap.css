@@ -1,0 +1,511 @@
+.mapBox {
+  display: flex;
+  position: relative;
+
+}
+
+.map-container {
+  width: 45%;
+  overflow: hidden;
+  /* background-color: #58af6e; */
+}
+
+.district-polygon {
+  fill: gray;
+  stroke: black;
+  stroke-width: 1;
+
+}
+
+.district-text {
+  fill: white;
+  font-weight: bold;
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+.hover-group {
+  pointer-events: none;
+  /* Prevents interaction with hover group */
+}
+
+.hover-background {
+  fill: white;
+}
+
+.hover-text1 {
+  fill: #2f2963;
+  font-weight: bold;
+  font-size: 14px;
+  text-anchor: middle;
+  pointer-events: none;
+  /* Prevent text from capturing mouse events */
+}
+
+
+.muzZone {
+  fill: #B99095;
+  stroke: white;
+  stroke-width: 1.2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  /* Smooth transition for stroke changes */
+}
+
+.muzZone:hover {
+  stroke: white;
+  /* Change stroke color on hover */
+  stroke-width: 1.2;
+  /* Change stroke width on hover */
+  animation: pulse 2s infinite alternate;
+  /* Apply the pulse animation */
+}
+
+.patnaZone {
+  fill: #C99460;
+  stroke: white;
+  stroke-width: 1.2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  /* Smooth transition for stroke changes */
+}
+
+.patnaZone:hover {
+  stroke: white;
+  /* Change stroke color on hover */
+  stroke-width: 1.2;
+  /* Change stroke width on hover */
+  animation: pulse 2s infinite alternate;
+  /* Apply the pulse animation */
+}
+
+.koshiZone {
+  fill: #8CBBBD;
+  stroke: white;
+  stroke-width: 1.2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  /* Smooth transition for stroke changes */
+}
+
+.koshiZone:hover {
+  stroke: white;
+  /* Change stroke color on hover */
+  stroke-width: 1.2;
+  /* Change stroke width on hover */
+  animation: pulse 2s infinite alternate;
+  /* Apply the pulse animation */
+}
+
+.bhagalpurZone {
+  fill: #D48C70;
+  stroke: white;
+  stroke-width: 1.2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  /* Smooth transition for stroke changes */
+}
+
+.bhagalpurZone:hover {
+  stroke: white;
+  /* Change stroke color on hover */
+  stroke-width: 1.2;
+  /* Change stroke width on hover */
+  animation: pulse 2s infinite alternate;
+  /* Apply the pulse animation */
+}
+
+.gayaZone {
+  fill: #5885AF;
+  stroke: white;
+  stroke-width: 1.2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  /* Smooth transition for stroke changes */
+}
+
+.gayaZone:hover {
+  stroke: white;
+  /* Change stroke color on hover */
+  stroke-width: 1.2;
+  /* Change stroke width on hover */
+  animation: pulse 2s infinite alternate;
+  /* Apply the pulse animation */
+}
+
+@keyframes pulse {
+  0% {
+    stroke-width: 2;
+    /* Starting width */
+  }
+
+  100% {
+    stroke-width: 2;
+    /* Hover width */
+  }
+}
+
+.secondPart {
+  width: 55%;
+  /* padding: 2rem; */
+  transition: all 0.3s ease;
+  /* background-color: aquamarine; */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  position: relative;
+  /* overflow: hidden; */
+ 
+}
+
+ul.imagesList .criteriaImage {
+    /* border: #af7158 2px solid; */
+    width: 5rem;  /* Fixed width for uniform size */
+  height: 5rem; /* Fixed height for uniform size */
+  /* object-fit: cover;  */
+}
+.imagesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+
+
+.ImageAndDetailsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: #f5570d 2px solid;  */
+  /* padding: 15px; */
+  box-sizing: border-box;
+  width: 7rem; /* Fixed width for uniformity */
+  /* padding: 0.5rem;  */
+  margin: 1rem;
+
+}
+
+
+.imagesList li span {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  /* display: flex;
+  flex-wrap: wrap;  */
+  margin-top: 5px; /* Add spacing between image and text */
+  /* border: #58af5c 2px solid; */
+  height: 2rem;
+}
+
+ul.zoneImagesList .zoneCriteriaImage {
+  width: 5rem;
+  height: 5rem;
+  
+}
+
+.zoneImagesList{
+  display:flex;
+  /* flex-direction: row; */
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+  /* padding: 1rem; */
+  margin: auto;
+}
+.zoneImageAndDetailsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0.5rem;
+  /* border: #58af5c 2px solid; */
+}
+
+.secondPart.show-zone-data .headerAndImages {
+  flex: 1;
+  flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  /* overflow-x: auto; */
+  /* margin-top: -17rem;  */
+  margin-top: 0;
+  transition: margin-top 0.3s ease; 
+  /* border-bottom: 2px solid #ddd; */
+}
+
+
+.zoneHeaderName{
+  text-align: center;
+  /* font-style: italic; */
+  font-size: 2rem;
+  /* font-family: 'Brush Script MT', cursive; */
+  font-family: "Times New Roman", Times, serif;
+  position: relative;
+  /* Required for absolute positioning of pseudo-elements */
+  /* margin: 1rem 0; */
+  color: #2f2963; 
+  margin: 0;
+}
+.zoneImagesList li span {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+
+  margin-top: 3px; 
+  /* border: #58af5c 2px solid; */
+  height: 2rem;
+  height: 1rem;
+  flex-wrap:nowrap;
+  white-space: nowrap;
+  
+}
+
+
+
+
+.zone-popup {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+margin: 0;
+
+}
+
+.update-time {
+  font-size: 14px;
+  color: rgb(155, 41, 41);
+  margin-top: 10px;
+}
+
+
+.map-decorative-heading {
+  text-align: center;
+  /* font-style: italic; */
+  font-size: 3rem;
+  /* font-family: 'Brush Script MT', cursive; */
+  font-family: "Times New Roman", Times, serif;
+  position: relative;
+  /* Required for absolute positioning of pseudo-elements */
+  /* margin: 1rem 0; */
+  /* margin-bottom: 3rem; */
+  color: #2f2963; 
+}
+.map-decorative-heading::before,
+.map-decorative-heading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 14%;
+  height: 1px;
+  /* Line thickness */
+  background: #2f2963;
+  /* Line color */
+  transform: translateY(-50%); 
+}
+
+.map-decorative-heading::before {
+  left: 0;
+  /* Add additional styling for the left line */
+}
+
+.map-decorative-heading::after {
+  right: 0;
+  /* Add additional styling for the right line */
+}
+
+
+.lastUpdatedText{
+position:absolute;
+bottom: 0;
+}
+/*---------------------------------------------------------------------------Responsive code----------------------------------------------------------------------*/
+
+/* For desktop screens */
+@media (max-width:1660px){
+  .imagesList li span {
+    font-size: 13px;
+  }
+
+ 
+
+.map-decorative-heading {
+  font-size: 2.5rem;
+ margin: 0;
+}
+.imagesList li span {
+  line-height: 1;
+}
+.map-decorative-heading::before,
+.map-decorative-heading::after {
+  width: 18%; 
+}
+
+}
+/*----------------------------------------------------------------------------------------------------*/
+@media (max-width:1504px){
+.map-decorative-heading {
+  font-size: 2rem;
+ margin: 0;
+}
+
+.zoneHeaderName{
+  font-size: 1.5rem;  
+}
+.ImageAndDetailsContainer{ 
+  width: 5rem; 
+  height: 5rem;
+}
+
+}
+/*----------------------------------------------------------------------------------------------------*/
+@media (max-width:1355px){
+  .map-decorative-heading {
+    font-size: 1.5rem;
+   margin: 0;
+  }
+  
+  .zoneHeaderName{
+    font-size: 1.2rem;  
+  }
+  
+  .zone-popup {  
+    top: 73%;
+  }
+  .map-decorative-heading::before,
+.map-decorative-heading::after {
+  width: 25%; 
+}
+  }
+  /*----------------------------------------------------------------------------------------------------*/
+@media (max-width:1214px){  
+  .mapBox {  
+  flex-direction: column;  
+
+  }
+  .map-container {
+    width: 100%;  
+  }
+  .secondPart {
+    width: 100%;
+    height: 25rem;
+  }
+  .ImageAndDetailsContainer{
+    width: 7rem; 
+    margin: 1rem;  
+  }
+  ul.imagesList .criteriaImage {
+    width: 5rem; 
+}
+.map-decorative-heading {
+  font-size: 2rem;
+  margin-top: 0;
+}
+.zoneHeaderName{
+  font-size: 1.5rem;
+}
+.map-decorative-heading::before,
+.map-decorative-heading::after {
+  width: 20%; 
+}
+}
+/*-----------------------------------------------------------------------------------------------------------*/
+@media (max-width:900px){  
+
+  .ImageAndDetailsContainer{
+    width: 5rem; 
+    margin: 1rem;  
+  }
+
+}
+/*-----------------------------------------------------------------------------------------------------------*/
+@media (max-width:740px){  
+
+  .ImageAndDetailsContainer{
+    width: 3rem; 
+    margin: 1rem;  
+  }
+  .map-decorative-heading::before,
+  .map-decorative-heading::after {
+    width: 7%; 
+  }
+}
+@media (max-width:625px){ 
+  .mapSection{
+    margin-right: .5rem;
+  }
+
+
+}
+/*-----------------------------------------------------------------------------------------------------------*/
+@media (max-width:580px){  
+  .secondPart {
+    width: 100%;
+    height: auto;
+    padding-bottom: 2rem;
+  }
+  .ImageAndDetailsContainer{
+    width: 3rem; 
+    margin: 1rem;  
+  }
+  .map-decorative-heading::before,
+  .map-decorative-heading::after {
+    width: 7%; 
+  }
+  .ImageAndDetailsContainer{
+    width: 7rem; 
+    margin: 2rem;  
+  } 
+  .zoneImageAndDetailsContainer{
+    flex-direction: column;
+   flex-wrap:wrap;
+    white-space: wrap;
+  }
+  .zone-popup {
+    position: static; 
+    margin: 1rem 0; 
+    width: 100%; 
+    box-sizing: border-box;
+    transform: none; 
+  }
+  .secondPart.show-zone-data .headerAndImages {
+      flex-wrap: wrap;
+      flex-direction: column;    
+      margin-bottom: 2rem;      
+    }  
+    .zoneImagesList div {
+      display: flex;
+      flex-wrap: wrap; 
+      justify-content: center;
+      align-items: center;
+    }
+    .imagesList {
+      margin-bottom: 2rem;
+     }
+    
+  
+}
+@media (max-width:565px){  
+  .map-decorative-heading::before,
+  .map-decorative-heading::after {
+    width: 5%; 
+  }
+}
+@media (max-width:545px){  
+  .map-decorative-heading::before,
+  .map-decorative-heading::after {
+    width: 3%; 
+  }
+}
+@media (max-width:545px){ 
+.imagesList {
+  margin-bottom: 3rem;
+ }
+}

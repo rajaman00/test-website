@@ -1,0 +1,564 @@
+.aboutSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  /* margin: 2rem; */
+  /* border-radius: 10px;
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  */
+  height: 37rem;
+  /* background-color: aliceblue */
+}
+
+.aboutText {
+
+  flex: 1.8;
+  color: #333;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-family: "Times New Roman", Times, serif;
+  padding: 5rem;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+.aboutText::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/images/AboutImages/aboutUs.jpg');
+  /* background-size: cover; */
+  background-position: center;
+  opacity: 0.6; 
+  filter: blur(3px); /* Adjust the blur amount */
+  z-index: -1; /* Ensure the background is behind the content */
+}
+
+.decorative-heading {
+  text-align: center;
+  font-style: italic;
+  font-size: 3rem;
+  font-family: 'Brush Script MT', cursive;
+  position: relative;
+  /* Required for absolute positioning of pseudo-elements */
+  margin: 1rem 0;
+  /* Add some space above and below the heading */
+
+  /* Text color */
+  /* background-color: #e7f70e; */
+
+  color: #2f2963;
+}
+
+.decorative-heading::before,
+.decorative-heading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  /* Line thickness */
+  background: #2f2963;
+  /* Line color */
+  transform: translateY(-50%);
+
+}
+
+.decorative-heading::before {
+  left: 0;
+  /* Add additional styling for the left line */
+}
+
+.decorative-heading::after {
+  right: 0;
+  /* Add additional styling for the right line */
+}
+
+
+.aboutImage {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* width: 20%; */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 1rem;
+  padding: 2rem;
+  height: 100%;
+  /* Ensure each section takes the full height */
+  align-items: center;
+  /* gap:1rem; */
+  /* background-color: rgb(220, 222, 245); */
+}
+
+.Card {
+  width: 13rem;
+  height: 13rem;
+  /* margin-top: 1.5rem;*/
+
+  margin: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: rgba(30, 2, 107, 0.432) 0px 19px 38px, rgba(210, 245, 15, 0.22) 0px 15px 12px;
+  transition: all 0.3s ease-in-out;
+  /* margin-left: 3rem;
+  margin-right: 3rem; */
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+
+}
+
+.cardImage {
+  width: 100%;
+  height: 8rem;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  /* margin-bottom: 0; */
+}
+
+.Card:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(61, 19, 245, 0.3) 0px 25px 50px, rgba(65, 112, 240, 0.22) 0px 20px 30px;
+
+}
+
+.cardText {
+  line-height: 0.9rem;
+  padding: 5px;
+
+  font-weight: 300;
+  border-top: #2f2963;
+  /* align-items: center;
+  justify-content: center; */
+  text-align: center;
+
+  overflow-wrap: break-word;
+  /* Ensures long words will wrap */
+  word-wrap: break-word;
+  /* Ensures long words will wrap */
+  white-space: normal;
+  /* Ensures text wraps within the container */
+
+  /* font-size: large; */
+
+}
+
+.OfficeHolderName {
+  word-wrap: break-word;
+  /* overflow-wrap: break-word; */
+  /* font-size: small; */
+  overflow-wrap: break-word;
+  /* Ensures long words will wrap */
+  word-wrap: break-word;
+  /* Ensures long words will wrap */
+  white-space: normal;
+  /* Ensures text wraps within the container */
+}
+
+.view-more-button {
+  background-color: transparent;
+  /* Initial background color */
+  color: #2f2963;
+  /* Text color */
+  border: 5px solid #2f2963;
+  /* Border color */
+  /* padding: 10px 20px; */
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  /* Transition for smooth change */
+  position: absolute;
+  /* Position at the bottom */
+  /* bottom: 2px; 
+  left: 50%; 
+  transform: translateX(-50%);  */
+  margin-bottom: 2rem;
+
+
+}
+
+.view-more-button:hover {
+  background-color: #2f2963;
+  /* Hover background color */
+  color: #fff;
+  /* Hover text color */
+}
+
+.newsAndUpdates .about-container {
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/************************************************     Responsive code     **********************************************************/
+@media (max-width: 1735px) {
+
+  .Card {
+    height: 13rem;
+    width: 12.5rem;
+  }
+
+  .aboutImage {
+    margin: 0.25rem;
+    padding: 0.5rem;
+  }
+
+}
+
+@media (max-width: 1618px) {
+
+  .Card {
+    height: 12rem;
+    width: 10rem;
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+  }
+
+  .designationName {
+    font-size: medium;
+  }
+
+  .aboutSection {
+    height: 34rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 1rem;
+  }
+
+
+}
+
+@media (max-width: 1382px) {
+  .Card {
+    height: 11.6rem;
+    width: 9rem;
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+  }
+
+  .designationName {
+    font-size: small;
+  }
+
+  .OfficeHolderName {
+    font-size: smaller;
+  }
+
+  .aboutSection {
+    height: 34rem;
+  }
+
+  .aboutText {
+    font-size: 1.199rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 1rem;
+
+  }
+
+}
+
+@media (max-width: 1292px) {
+  .Card {
+    height: 11.6rem;
+    width: 8rem;
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+  }
+
+  .designationName {
+    font-size: small;
+  }
+
+  .OfficeHolderName {
+    font-size: smaller;
+  }
+
+  .aboutSection {
+    height: 34rem;
+  }
+
+  .aboutText {
+    font-size: 1.199rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 0.5rem;
+
+  }
+
+}
+
+@media (max-width: 1203px) {
+  .Card {
+    height: 11.6rem;
+    width: 7.9rem;
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+  }
+
+  .designationName {
+    font-size: small;
+  }
+
+  .OfficeHolderName {
+    font-size: smaller;
+  }
+
+  .aboutSection {
+    height: 34rem;
+  }
+
+  .aboutText {
+    font-size: 1.199rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 0.5rem;
+
+  }
+
+}
+
+@media (max-width: 1194px) {
+  .Card {
+    /* height: 11.6rem;
+        width: 7.9rem; */
+    height: 13rem;
+    width: 13rem;
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+    margin-top: 1rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .designationName {
+    font-size: large;
+  }
+
+  .OfficeHolderName {
+    font-size: medium;
+  }
+
+  .aboutSection {
+    /* height: 45rem; */
+    height: auto;
+    flex-direction: column;
+
+
+  }
+
+  .aboutText {
+    font-size: 1.199rem;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 0.5rem;
+
+  }
+
+}
+
+@media (max-width: 1176px) {
+  .Card {
+    height: 11.6rem;
+    width: 10rem;
+    /* height: 13rem;
+          width: 13rem; */
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+    margin-top: 1rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .designationName {
+    font-size: small;
+  }
+
+  .OfficeHolderName {
+    font-size: small;
+  }
+
+  .aboutSection {
+    /* height: 45rem; */
+    height: auto;
+    flex-direction: column;
+
+
+  }
+
+  .aboutText {
+    font-size: 1.199rem;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 0.5rem;
+
+  }
+
+}
+
+@media (max-width: 984px) {
+  .Card {
+    height: 11.6rem;
+    width: 8rem;
+    /* height: 13rem;
+            width: 13rem; */
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+    margin-top: 1rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .designationName {
+    font-size: small;
+  }
+
+  .OfficeHolderName {
+    font-size: small;
+  }
+
+  .aboutSection {
+    /* height: 45rem; */
+    height: auto;
+    flex-direction: column;
+
+
+  }
+
+  .aboutText {
+    font-size: 1.199rem;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 0.5rem;
+
+  }
+
+}
+
+@media (max-width: 856px) {
+  .Card {
+    height: 13rem;
+    width: 13rem;
+    /* height: 13rem;
+              width: 13rem; */
+  }
+
+  .aboutImage {
+    margin: 0.125rem;
+    padding: 0.25rem;
+    margin-top: 1rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .designationName {
+    font-size: large;
+  }
+
+  .OfficeHolderName {
+    font-size: medium;
+  }
+
+  .aboutSection {
+    /* height: 45rem; */
+    height: auto;
+    flex-direction: column;
+
+
+  }
+
+  .aboutText {
+    font-size: 1.199rem;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .view-more-button {
+    margin-bottom: 0.5rem;
+
+  }
+}
+@media (max-width:775px){
+  .decorative-heading::before,
+  .decorative-heading::after {   
+    width: 25%; 
+  } 
+}
+@media (max-width:625px){ 
+    .about{
+    margin-top: 5rem;
+    overflow: hidden;
+    /*added later on*/
+    margin-left: 2rem;
+    margin-bottom: 4rem;
+    margin-right: .5rem;  
+}
+.aboutSection {
+  padding: 0;
+  padding-left: 1.8rem;
+}
+.aboutText{
+padding: 2rem;
+
+}
+
+}
+
+ @media (max-width:455px){
+  .decorative-heading::before,
+  .decorative-heading::after {   
+    width: 23%; 
+  } 
+}
+@media (max-width:425px){
+  .decorative-heading::before,
+  .decorative-heading::after {   
+    width: 0%; 
+  } 
+}

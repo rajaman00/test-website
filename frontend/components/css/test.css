@@ -1,0 +1,63 @@
+.test{
+  display: flex;
+  width: 100%;
+  /* background-color: #0bafec; */
+}
+
+.scrolling-text-container {
+  width: 90%;
+   position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #2f2963;
+  /* background: #864545; Change as needed */
+  color: white;
+  padding: 10px 0; /* Adjust padding as needed */
+  border-top-left-radius: 15px;
+}
+
+.scrolling-text {
+  display: flex;
+  position: relative;
+  padding: 10px;
+  white-space: nowrap;
+  padding-left: 100%;
+  /* background-color: #2f2963; */
+  animation: 50s linear 0s infinite normal none running marqueeAnimation-37574610;
+  
+}
+.scrolling-text li{
+  padding: 5px;
+}
+
+.scrolling-text-container:hover .scrolling-text {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-text {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+@keyframes marqueeAnimation-37574610{
+  100% {
+    margin-left: -3910px;
+}
+}
+
+.leftCrossEffect{
+  width: 30%;
+  height: 100%;
+  position: absolute;
+  left: 92%;
+  top: 0;
+  background-color: #2f2963;
+  transform-origin: top left;
+  transform: skewX(-23deg);
+  border-top-left-radius: 15px;
+  /* border-top-right-radius: 25px; */
+}

@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+.wraper{
+  height: max-content;
+  
+  /* overflow-x: hidden; */
+  position: relative;
+}
+.navigationBar{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  
+}
+
+.stickyMenu{
+  position: fixed;
+  top: 12rem;
+  left: 0;
+  z-index: 9;
+}
+.about{
+  overflow: hidden;
+  margin-top: 4rem;
+  margin-left: 5rem;
+  margin-bottom: 4rem;
+   margin-right: 5rem; 
+}
+.mapSection{
+  margin-top: 4rem;
+  margin-left: 5rem;
+  margin-bottom: 4rem;
+  margin-right: 5rem;
+}
+.tenders{
+  margin-top: 4rem;
+  margin-left: 5rem;
+  margin-bottom: 4rem;
+  margin-right: 5rem;
+}
+.OtherUtilities{
+  margin-top: 4rem;
+  margin-left: 5rem;
+  margin-bottom: 4rem;
+  margin-right: 5rem;
+}
+.VMVsection{
+  margin-top: 5rem;
+  overflow: hidden;
+  /*added later on*/
+  margin-left: 5rem;
+  margin-bottom: 4rem;
+  margin-right: 5rem;
+}
+
+.awardSection{
+  margin-top: 5rem;
+}
+.MediaAndNewspaperClippings{
+  margin-top: 4rem;
+  margin-left: 5rem;
+  margin-bottom: 4rem;
+  margin-right: 5rem;
+}
