@@ -11,7 +11,7 @@ function Test() {
         <div className="leftCrossEffect"></div>
       </div>
       <div className="scrolling-text-container">
-        <div className="scrolling-text marqueeAnimation-37574610">
+       <a style={{textDecoration:'none', color: 'white'}} href="/noticeboard"> <div className="scrolling-text marqueeAnimation-37574610">
           <li> Regarding uninterrupted power supply during Diwali and Chhath puja vide Notification No. 2770 dated 22.10.2024 <img src={NewImage} alt="" /> </li>
           <li> Regarding Standard Operating Procedures (SOP).<img src={NewImage} alt="" /></li>
           <li> Public Notice regarding safety warning in light of charging of 220kV double circuit Tajpur-Samastipur (New) Transmission Line on or after 18.10.2024<img src={NewImage} alt="" /></li>
@@ -21,7 +21,7 @@ function Test() {
           <li> Notice Board. Some placeholder text. And some more text.<img src={NewImage} alt="" /></li>
 
           
-        </div>
+        </div></a>
         
       </div>
       {/* <div style={{ position: 'relative', display: 'flex' }}>

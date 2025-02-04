@@ -28,6 +28,8 @@ import NewsPaper_Clipping from './Pages/NewsPaper_Clipping.jsx';
 import PhotoGalleryPage from './Pages/PhotoGalleryPage.jsx';
 import PhotoGalleryDetails from './Pages/PhotoGalleyDetails.jsx'
 import TransferPosting from './Pages/TransferPosting.jsx';
+import NoticeBoard from './Pages/NoticeBoard.jsx';
+import PhoneDirectory from './Pages/PhoneDirectory.jsx';
 
 const UserRoutes = () => {
   return (
@@ -59,7 +61,9 @@ const UserRoutes = () => {
       <Route path="/upcoming-grids" element={<UpcomingGrids />} />
       <Route path="/newspaper-clippings" element={<NewsPaper_Clipping />} />
       <Route path="/photo-gallery" element={<PhotoGalleryPage />} />
+      <Route path="/Noticeboard" element={<NoticeBoard/>  } />
       <Route path="/photo-gallery/photo-gallery-details" element={<PhotoGalleryDetails />} />
+      <Route path="/phone-directory" element={<PhoneDirectory/>  } />
     </Routes>
   );
 };

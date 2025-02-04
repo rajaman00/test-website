@@ -18,6 +18,8 @@ function Tenders() {
   const [showOfficeOrdersR, setShowOfficeOrdersR] = useState(true);
   const [showTransferPostingsR, setShowTransferPostingsR] = useState(false);
   const [showCircularsR, setShowCircularsR] = useState(false);
+  const [showNotificationsR, setshowNotificationsR] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,6 +78,8 @@ function Tenders() {
       setShowOfficeOrdersR(type === 'OfficeOrders');
       setShowTransferPostingsR(type === 'TransferPostings');
       setShowCircularsR(type === 'Circulars');
+      setshowNotificationsR(type === 'Notifications');
+
       setActiveButtonRight(type);
     }
   };
@@ -187,6 +191,14 @@ function Tenders() {
           <button onClick={() => handleButtonClick('right', 'Circulars')} className={`button ${activeButtonRight === 'Circulars' ? 'active' : ''}`}>
             Circulars
           </button>
+
+          <button
+            onClick={() => handleButtonClick('right', 'Notifications')}
+            className={`button ${activeButtonRight === 'Notifications' ? 'active' : ''}`}
+          >
+            Notifications
+          </button>
+
         </div>
 
         <div className="content-container">
@@ -268,6 +280,43 @@ function Tenders() {
               <button className="view-more-button">View More</button>
             </div>
           )}
+
+{showNotificationsR && (
+            <div className="content">
+              {/* Display Circulars Content for Section B */}
+              <div className="rowData">
+                <div className="document-icon">
+                  <img src="public/images/doc.png" alt="Document Icon" />
+                </div>
+                <div className="details-header">
+                  <h6>Regarding Notification 1</h6>
+                  <div className="details-container">
+                    <p>Department: HR</p>
+                    <p className='verticalSeparator'>|</p>
+                    <p>Issue Date: Jul 24, 2024</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rowData">
+                <div className="document-icon">
+                  <img src="public/images/doc.png" alt="Document Icon" />
+                </div>
+                <div className="details-header">
+                  <h6>Regarding Notification 2</h6>
+                  <div className="details-container">
+                    <p>Department: HR</p>
+                    <p className='verticalSeparator'>|</p>
+                    <p>Issue Date: Jul 24, 2024</p>
+                  </div>
+                </div>
+              </div>
+              {/* Add more content as needed */}
+              <button className="view-more-button">View More</button>
+            </div>
+          )}
+
+
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ function NewsPaper_Clipping() {
         title="News Paper Clipping"
         breadcrumbs={breadcrumbs}
       />
-       <div style={{height:'800px', width:'100%',backgroundColor:'red'}}></div>
+       
       <Footer/>
     </>
   )

@@ -11,7 +11,7 @@ function AwardsSection() {
         <div className="awardleftCrossEffect"></div>
       </div>
       <div className="award-scrolling-text-container">
-        <div className="award-scrolling-text award-marqueeAnimation-37574610">
+        <a href="/awards-achievements" style={{textDecoration:'none', color: 'white'}}><div className="award-scrolling-text award-marqueeAnimation-37574610">
           <li>News 1: Notice Board. Some placeholder text. And some more text. <img src={NewImage} alt="" /> </li>
           <li>News 2: Notice Board. Some placeholder text. And some more text.<img src={NewImage} alt="" /></li>
           <li>News 3: Notice Board. Some placeholder text. And some more text.<img src={NewImage} alt="" /></li>
@@ -21,7 +21,7 @@ function AwardsSection() {
           <li>News 7: Notice Board. Some placeholder text. And some more text.<img src={NewImage} alt="" /></li>
 
           
-        </div>
+        </div></a>
         
       </div>
     </div>
