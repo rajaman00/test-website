@@ -255,6 +255,7 @@ function NavigationBar() {
                                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                                 <Navbar.Collapse id="responsive-navbar-nav">
                                     <Nav className="ms-auto">
+                                        
                                         {/* ----About Us--- */}
                                         <li className='navLink'
                                             onMouseOver={() => setAboutHovered(true)}
@@ -270,7 +271,7 @@ function NavigationBar() {
                                                         < Link to='/organization-structure' className='dropdownMenuText'>{t('org_strct')}</Link>
                                                         < Link to='/awards-achievements' className='dropdownMenuText' >Awards & Achievements</Link>
                                                         < Link to='/certificates' className='dropdownMenuText' >Certificates</Link>
-                                                        < Link className='dropdownMenuText' >Reports and Accounts</Link>
+                                                        < Link to='/annual-reports' className='dropdownMenuText' >Reports and Accounts</Link>
                                                     </div>
                                                 </div>
                                             )}
@@ -335,8 +336,8 @@ function NavigationBar() {
                                                             {isUpcomInfrastructureHovered && (
                                                                 <div className='UpcomInfrastructureDropDown'>
                                                                     <div className='dropDownMenu'>
-                                                                        < Link className='dropdownMenuText'>Transmission Lines</Link>
-                                                                        < Link className='dropdownMenuText'>Grids</Link>
+                                                                        < Link to='/upcoming-transmission-lines' className='dropdownMenuText'>Transmission Lines</Link>
+                                                                        < Link to='/upcoming-grids' className='dropdownMenuText'>Grids</Link>
                                                                     </div>
                                                                 </div>
 

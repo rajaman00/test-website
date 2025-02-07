@@ -84,8 +84,7 @@ const PhoneDirectory = () => {
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    { label: 'Notices', href: '#' },
-    { label: 'Notifications' }
+    { label: 'Phone Directory', href: '#' }
   ];
 
   return (
@@ -93,7 +92,7 @@ const PhoneDirectory = () => {
       <NavigationBar/>
       <HeaderBox
                 backgroundImage={backgroundImage}
-                title="Circulars"
+                title="Phone Directory"
                 breadcrumbs={breadcrumbs}
             />
     <Box sx={{ maxWidth: 800, mx: "auto", p: 4, mt: 5, bgcolor: "#f9f9f9", borderRadius: 4, boxShadow: 3 }}>
@@ -160,7 +159,7 @@ const PhoneDirectory = () => {
             <TableRow sx={{ bgcolor: "#1976d2" }}>
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Name</TableCell>
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Designation</TableCell>
-              <TableCell sx={{ color: "white", fontWeight: "bold" }}>Mobile</TableCell>
+              <TableCell sx={{ color: "white", fontWeight: "bold" }}>Mobile/Email</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

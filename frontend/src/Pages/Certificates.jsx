@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Card, CardContent, CardMedia, Typography, Box, Breadcrumbs, Link} from '@mui/material';
+import { Grid, Card, CardContent, CardMedia, Typography, Box, Breadcrumbs, Link } from '@mui/material';
 import HeaderBox from './Header';
 
 // Import images at the top of the file
@@ -11,7 +11,7 @@ import backgroundImage from '../../public/images/Switchyard at Bakhri GSS.jpg'
 import NavigationBar from '../../components/NavigationBar';
 import Footer from '../../components/Footer';
 
-const certificateDetails= [
+const certificateDetails = [
   {
     title: 'वार्षिक रिपोर्ट 2023-24',
     img: report2023_24,
@@ -43,40 +43,40 @@ const Certificates = () => {
     { label: 'Home', href: '/' },
     { label: 'About Us', href: '#' },
     { label: 'Certificates' }
-];
+  ];
   return (
     <>
-    <NavigationBar/>
-    <div>
-    <HeaderBox
-                backgroundImage={backgroundImage}
-                title="Certificates"
-                breadcrumbs={breadcrumbs}
-            />
-           </div>
-           <Grid container spacing={3} justifyContent="center" sx={{ padding: '20px',marginTop:'1rem' }}>
-      {certificateDetails.map((certificateDetails, index) => (
-        <Grid item xs={12} sm={6} md={3} key={index}>
-          <Link href={certificateDetails.link} underline="none" target="_blank" rel="noopener noreferrer" sx={{ textDecoration: 'none' }}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                component="img"
-                height="300"
-                image={certificateDetails.img}
-                alt={certificateDetails.alt}
-                sx={{ objectFit: 'contain' }}
-              />
-              <CardContent>
-                <Typography variant="h6" component="div" align="center">
-                  {certificateDetails.title}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Link>
-        </Grid>
-      ))}
-    </Grid>
-    <Footer/>
+      <NavigationBar />
+      <div>
+        <HeaderBox
+          backgroundImage={backgroundImage}
+          title="Certificates"
+          breadcrumbs={breadcrumbs}
+        />
+      </div>
+      <Grid container spacing={3} justifyContent="center" sx={{ padding: '20px', marginTop: '1rem' }}>
+        {certificateDetails.map((certificateDetails, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Link href={certificateDetails.link} underline="none" target="_blank" rel="noopener noreferrer" sx={{ textDecoration: 'none' }}>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardMedia
+                  component="img"
+                  height="300"
+                  image={certificateDetails.img}
+                  alt={certificateDetails.alt}
+                  sx={{ objectFit: 'contain' }}
+                />
+                <CardContent>
+                  <Typography variant="h6" component="div" align="center">
+                    {certificateDetails.title}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
+      <Footer />
     </>
   );
 };
