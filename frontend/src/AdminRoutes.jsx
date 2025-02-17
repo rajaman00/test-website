@@ -11,6 +11,7 @@ import Designation from './admin/Designation.jsx'
 import MapSection from './admin/MapSection.jsx'
 import NoticeBoard from './admin/NoticeBoard.jsx';
 import PhotoGallery from './admin/PhotoGallery.jsx';
+import PhoneDirectory from './admin/PhoneDirectory.jsx';
 
 const AdminRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AdminRoutes = () => {
       <Route path="/admin/office-order" element={<AdminOfficeOrder />} />
       <Route path="/admin/notice-board" element={<NoticeBoard/> } />
       <Route path="/admin/photo-gallery" element={<PhotoGallery/> } />
+      <Route path="/admin/phone-directory" element={<PhoneDirectory/> } />
 
 <Route path="/admin/designation-master" element={<Designation/> } />
       <Route path="/admin/map-section" element={<MapSection/> } />
