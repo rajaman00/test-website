@@ -5,7 +5,7 @@ const HeaderBox = ({ backgroundImage, title, breadcrumbs }) => {
   return (
     <Box
       sx={{
-        // overflow:'hidden',
+        overflow:'hidden',
         width:'100%',
         position: 'relative',
         backgroundRepeat: 'no-repeat',

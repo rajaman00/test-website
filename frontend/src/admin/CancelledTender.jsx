@@ -18,6 +18,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Pagination,
 } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -33,49 +34,79 @@ function CancelledTender() {
   const [publicationDate, setPublicationDate] = useState(null);
   const [publicationTime, setPublicationTime] = useState('');
   const [file, setFile] = useState(null);
+  const [documentName, setDocumentName] = useState(''); // To display the uploaded document name
+  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false); // For upload confirmation
+  const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false); // For submit confirmation
+  const [submitEvent, setSubmitEvent] = useState(null); // Store the submit event
 
   const [tenders, setTenders] = useState([]);
   const [archivedTenders, setArchivedTenders] = useState([]);
   const [editTender, setEditTender] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Number of items per page
+
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setIsUploadDialogOpen(true); // Open upload confirmation dialog
+    }
+  };
+
+  const handleUploadConfirmation = (confirmed) => {
+    if (confirmed) {
+      setDocumentName(file.name); // Set the document name if confirmed
+    } else {
+      setFile(null); // Clear the file if not confirmed
+    }
+    setIsUploadDialogOpen(false); // Close the dialog
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSubmitEvent(event); // Store the event
+    setIsSubmitDialogOpen(true); // Open submit confirmation dialog
+  };
 
-    const formattedClosingDate = closingDate
-      ? dayjs(`${closingDate.format('YYYY-MM-DD')}T${closingTime}`).toISOString()
-      : null;
-    const formattedPublicationDate = publicationDate
-      ? dayjs(`${publicationDate.format('YYYY-MM-DD')}T${publicationTime}`).toISOString()
-      : null;
+  const handleSubmitConfirmation = (confirmed) => {
+    if (confirmed && submitEvent) {
+      const formattedClosingDate = closingDate
+        ? dayjs(`${closingDate.format('YYYY-MM-DD')}T${closingTime}`).toISOString()
+        : null;
+      const formattedPublicationDate = publicationDate
+        ? dayjs(`${publicationDate.format('YYYY-MM-DD')}T${publicationTime}`).toISOString()
+        : null;
 
-    const newTender = {
-      id: Date.now(), // Simulating unique ID
-      headline: event.target.headline.value,
-      closingDate: formattedClosingDate,
-      publicationDate: formattedPublicationDate,
-      aliasName: event.target.aliasName.value,
-      details: event.target.details.value,
-      document: file?.name || '',
-    };
+      const newTender = {
+        id: Date.now(), // Simulating unique ID
+        headline: submitEvent.target.headline.value,
+        closingDate: formattedClosingDate,
+        publicationDate: formattedPublicationDate,
+        aliasName: submitEvent.target.aliasName.value,
+        details: submitEvent.target.details.value,
+        document: documentName || '', // Use the confirmed document name
+      };
 
-    setTenders((prev) => [...prev, newTender]);
+      setTenders((prev) => [...prev, newTender]);
 
-    // Reset form fields
-    event.target.reset();
-    setClosingDate(null);
-    setClosingTime('');
-    setPublicationDate(null);
-    setPublicationTime('');
-    setFile(null);
+      // Reset form fields
+      submitEvent.target.reset();
+      setClosingDate(null);
+      setClosingTime('');
+      setPublicationDate(null);
+      setPublicationTime('');
+      setFile(null);
+      setDocumentName('');
+    }
+    setIsSubmitDialogOpen(false); // Close the dialog
+    setSubmitEvent(null); // Clear the stored event
   };
 
   // Auto-move expired tenders to archive
@@ -121,17 +152,27 @@ function CancelledTender() {
     setEditTender((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Pagination logic
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  const paginatedTenders = tenders.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <>
       <AdminHeader />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Grid container>
-          <Grid item xs={3} sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
+          <Grid item xs={2.5} sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
             <SidebarMenu />
           </Grid>
-          <Grid item xs={9}>
-            <Box sx={{ width: '100%', padding: 3 }}>
-              <Paper elevation={3} sx={{ borderRadius: '12px' }}>
+          <Grid item xs={9.5}>
+            <Box sx={{ width: '100%', padding: 0 }}>
+              <Paper sx={{ borderRadius: '12px' }}>
                 <Box
                   sx={{
                     borderBottom: 1,
@@ -143,7 +184,7 @@ function CancelledTender() {
                   <Tabs
                     value={tabIndex}
                     onChange={handleTabChange}
-                    aria-label="Cancelled Tenders"
+                    aria-label="NIT/RFP Tabs"
                     textColor="primary"
                     indicatorColor="primary"
                     centered
@@ -159,7 +200,7 @@ function CancelledTender() {
                   {tabIndex === 0 && (
                     <form onSubmit={handleSubmit}>
                       <Typography variant="h6" gutterBottom>
-                        Cancelled Tender
+                        Add Cancelled Tender
                       </Typography>
                       <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -228,6 +269,11 @@ function CancelledTender() {
                             Upload Document
                             <input type="file" hidden onChange={handleFileChange} />
                           </Button>
+                          {documentName && (
+                            <Typography variant="body2" sx={{ mt: 1 }}>
+                              Uploaded Document: {documentName}
+                            </Typography>
+                          )}
                         </Grid>
                         <Grid item xs={12}>
                           <TextField
@@ -268,56 +314,63 @@ function CancelledTender() {
                       </Box>
                     </form>
                   )}
-{tabIndex === 1 && (
-  <Box p={3}>
-    <Typography variant="h6" gutterBottom>
-      Uploaded Tenders
-    </Typography>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>Sl. No.</TableCell>
-          <TableCell>Headline</TableCell>
-          <TableCell>Document Name</TableCell>
-          <TableCell>Publishing Date</TableCell>
-          <TableCell>Closing Date</TableCell>
-          <TableCell>Actions</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {tenders.map((tender, index) => (
-          <TableRow key={tender.id}>
-            <TableCell>{index + 1}</TableCell> {/* Sl. No. */}
-            <TableCell>{tender.headline}</TableCell>
-            <TableCell>{tender.document || 'N/A'}</TableCell>
-            <TableCell>
-              {tender.publicationDate
-                ? dayjs(tender.publicationDate).format('DD/MM/YYYY HH:mm')
-                : 'N/A'}
-            </TableCell>
-            <TableCell>
-              {tender.closingDate
-                ? dayjs(tender.closingDate).format('DD/MM/YYYY HH:mm')
-                : 'N/A'}
-            </TableCell>
-            <TableCell>
-              <IconButton color="primary" onClick={() => handleEdit(tender)}>
-                <Edit />
-              </IconButton>
-              <IconButton
-                color="secondary"
-                onClick={() => handleDelete(tender.id)}
-              >
-                <Delete />
-              </IconButton>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </Box>
-)}
-
+                  {tabIndex === 1 && (
+                    <Box p={3}>
+                      <Typography variant="h6" gutterBottom>
+                        Uploaded Tenders
+                      </Typography>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Sl. No.</TableCell>
+                            <TableCell>Headline</TableCell>
+                            <TableCell>Document Name</TableCell>
+                            <TableCell>Publishing Date</TableCell>
+                            <TableCell>Closing Date</TableCell>
+                            <TableCell>Actions</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {paginatedTenders.map((tender, index) => (
+                            <TableRow key={tender.id}>
+                              <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
+                              <TableCell>{tender.headline}</TableCell>
+                              <TableCell>{tender.document || 'N/A'}</TableCell>
+                              <TableCell>
+                                {tender.publicationDate
+                                  ? dayjs(tender.publicationDate).format('DD/MM/YYYY HH:mm')
+                                  : 'N/A'}
+                              </TableCell>
+                              <TableCell>
+                                {tender.closingDate
+                                  ? dayjs(tender.closingDate).format('DD/MM/YYYY HH:mm')
+                                  : 'N/A'}
+                              </TableCell>
+                              <TableCell>
+                                <IconButton color="primary" onClick={() => handleEdit(tender)}>
+                                  <Edit />
+                                </IconButton>
+                                <IconButton
+                                  color="secondary"
+                                  onClick={() => handleDelete(tender.id)}
+                                >
+                                  <Delete />
+                                </IconButton>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                        <Pagination
+                          count={Math.ceil(tenders.length / itemsPerPage)}
+                          page={currentPage}
+                          onChange={handlePageChange}
+                          color="primary"
+                        />
+                      </Box>
+                    </Box>
+                  )}
                   {tabIndex === 2 && (
                     <Box p={3}>
                       <Typography variant="h6" gutterBottom>
@@ -373,6 +426,38 @@ function CancelledTender() {
           </Button>
           <Button onClick={handleDialogSubmit} variant="contained" color="primary">
             Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Upload Confirmation Dialog */}
+      <Dialog open={isUploadDialogOpen} onClose={() => handleUploadConfirmation(false)}>
+        <DialogTitle>Confirm Upload</DialogTitle>
+        <DialogContent>
+          <Typography>Do you want to upload {file?.name}?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleUploadConfirmation(false)} color="secondary">
+            No
+          </Button>
+          <Button onClick={() => handleUploadConfirmation(true)} variant="contained" color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Submit Confirmation Dialog */}
+      <Dialog open={isSubmitDialogOpen} onClose={() => handleSubmitConfirmation(false)}>
+        <DialogTitle>Confirm Submission</DialogTitle>
+        <DialogContent>
+          <Typography>Do you want to submit the form?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleSubmitConfirmation(false)} color="secondary">
+            No
+          </Button>
+          <Button onClick={() => handleSubmitConfirmation(true)} variant="contained" color="primary">
+            Yes
           </Button>
         </DialogActions>
       </Dialog>

@@ -8,6 +8,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   IconButton,
@@ -21,6 +22,8 @@ import {
   Select,
   MenuItem,
   Grid,
+  Pagination,
+  Paper
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -31,37 +34,42 @@ const AdminOfficeOrder = () => {
   const [tabValue, setTabValue] = useState(0);
   const [files, setFiles] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
+  const [page, setPage] = useState(1);
+  const recordsPerPage = 10; // Number of records per page
+
   const [formData, setFormData] = useState({
-    department: "",
+    department: "",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     headline: "",
     issueDate: "",
     details: "",
     file: null,
   });
-  const [editFile, setEditFile] = useState(null); // To store the file being edited
-  const [isEditing, setIsEditing] = useState(false); // To open/close the edit dialog
-  const [successDialogOpen, setSuccessDialogOpen] = useState(false); // For success dialog
 
-  const departments = ["Civil-Engg.", "Comm. Revenue Accounting and Energy Accounting", "CRITL", "Finance and Accounts", "Human Resource and Administration", "I.T.", "Inter State", "Power Management Cell", "Project and Planning", "SLDC", "Store and Material", "STU", "Telecom", "Training", "Transmission(O and M)", "ULDC"]; // departments
+  const [editFile, setEditFile] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
-  // Handle tab switch
+  const departments = [
+    "Civil-Engg.", "Comm. Revenue Accounting and Energy Accounting", "CRITL",
+    "Finance and Accounts", "Human Resource and Administration", "I.T.",
+    "Inter State", "Power Management Cell", "Project and Planning", "SLDC",
+    "Store and Material", "STU", "Telecom", "Training", "Transmission(O and M)", "ULDC"
+  ];
+
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
 
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle file change
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, file });
   };
 
-  // Submit form
   const handleSubmit = () => {
     if (!formData.file) {
       alert("Please upload a document before submitting.");
@@ -83,7 +91,6 @@ const AdminOfficeOrder = () => {
         file: null,
       });
 
-      // Open the success dialog
       setSuccessDialogOpen(true);
     }
   };
@@ -92,8 +99,6 @@ const AdminOfficeOrder = () => {
     setSuccessDialogOpen(false);
   };
 
-
-  // Handle delete with confirmation prompt
   const handleDelete = (id) => {
     const confirmDeletion = window.confirm("Are you sure you want to delete this file?");
     if (confirmDeletion) {
@@ -101,26 +106,21 @@ const AdminOfficeOrder = () => {
     }
   };
 
-
-  // Open edit dialog
   const handleEdit = (file) => {
     setEditFile({ ...file });
     setIsEditing(true);
   };
 
-  // Handle edit input change
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditFile((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle edit file change
   const handleEditFileChange = (e) => {
     const file = e.target.files[0];
     setEditFile((prev) => ({ ...prev, file, fileName: file?.name }));
   };
 
-  // Save edited file
   const handleEditSave = () => {
     setFiles((prevFiles) =>
       prevFiles.map((file) => (file.id === editFile.id ? editFile : file))
@@ -129,38 +129,34 @@ const AdminOfficeOrder = () => {
     setEditFile(null);
   };
 
-  // Close edit dialog
   const handleEditCancel = () => {
     setIsEditing(false);
     setEditFile(null);
   };
 
+  // Pagination logic
+  const startIndex = (page - 1) * recordsPerPage;
+  const currentRecords = files.slice(startIndex, startIndex + recordsPerPage);
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <>
-      {/* Success Dialog */}
-      <Dialog
-        open={successDialogOpen}
-        onClose={handleSuccessDialogClose}
-        aria-labelledby="success-dialog-title"
-        aria-describedby="success-dialog-description"
-      >
-        <DialogTitle id="success-dialog-title">Success</DialogTitle>
+      <Dialog open={successDialogOpen} onClose={handleSuccessDialogClose}>
+        <DialogTitle>Success</DialogTitle>
         <DialogContent>
-          <Typography id="success-dialog-description">
-            Data submitted successfully!
-          </Typography>
+          <Typography>Data submitted successfully!</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSuccessDialogClose} autoFocus>
-            OK
-          </Button>
+          <Button onClick={handleSuccessDialogClose}>OK</Button>
         </DialogActions>
       </Dialog>
 
       <AdminHeader />
 
       <Box sx={{ display: "flex", height: "100vh" }}>
-        {/* Sidebar */}
         <Box sx={{ width: "20%", borderRight: "1px solid #ddd" }}>
           <SidebarMenu />
         </Box>
@@ -302,52 +298,55 @@ const AdminOfficeOrder = () => {
             </Box>
           )}
 
-          {tabValue === 1 && (
-            <Table>
-              <TableHead sx={{
-                backgroundColor: "#f5f5f5", // Light gray background color
-                '& .MuiTableCell-root': {
-                  fontWeight: "bold", // Make the font bold
-                  color: "black", // Optional: set the text color
-                },
-              }}>
-                <TableRow>
-                  <TableCell>Department</TableCell>
-                  <TableCell>Headline</TableCell>
-                  <TableCell>Issue Date</TableCell>
-                  <TableCell>Details</TableCell>
-                  <TableCell>Document</TableCell>
-                  <TableCell>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {files.map((file) => (
-                  <TableRow key={file.id}>
-                    <TableCell>{file.department}</TableCell>
-                    <TableCell>{file.headline}</TableCell>
-                    <TableCell>{file.issueDate}</TableCell>
-                    <TableCell>{file.details}</TableCell>
-                    <TableCell>
-                      <a
-                        href={URL.createObjectURL(file.file)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View File
-                      </a>
-                    </TableCell>
-                    <TableCell>
-                      <IconButton color="primary" onClick={() => handleEdit(file)}>
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton color="error" onClick={() => handleDelete(file.id)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+{tabValue === 1 && (
+            <Paper sx={{ padding: 2 }}>
+              <TableContainer>
+                <Table>
+                  <TableHead sx={{ backgroundColor: "#f5f5f5" }}>
+                    <TableRow>
+                      <TableCell>Department</TableCell>
+                      <TableCell>Headline</TableCell>
+                      <TableCell>Issue Date</TableCell>
+                      <TableCell>Details</TableCell>
+                      <TableCell>Document</TableCell>
+                      <TableCell>Actions</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {currentRecords.map((file) => (
+                      <TableRow key={file.id}>
+                        <TableCell>{file.department}</TableCell>
+                        <TableCell>{file.headline}</TableCell>
+                        <TableCell>{file.issueDate}</TableCell>
+                        <TableCell>{file.details}</TableCell>
+                        <TableCell>
+                          <a href={URL.createObjectURL(file.file)} target="_blank" rel="noopener noreferrer">
+                            View File
+                          </a>
+                        </TableCell>
+                        <TableCell>
+                          <IconButton color="primary" onClick={() => handleEdit(file)}>
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton color="error" onClick={() => handleDelete(file.id)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+
+              {/* Pagination Component */}
+              <Pagination
+                count={Math.ceil(files.length / recordsPerPage)}
+                page={page}
+                onChange={handleChangePage}
+                color="primary"
+                sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}
+              />
+            </Paper>
           )}
         </Box>
       </Box>

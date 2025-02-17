@@ -6,7 +6,7 @@
 .wraper{
   height: max-content;
   
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   position: relative;
 }
 .navigationBar{

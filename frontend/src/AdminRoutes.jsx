@@ -9,6 +9,8 @@ import TransferPosting from './admin/TransferPosting.jsx';
 import AdminOfficeOrder from './admin/AdminOfficeOrder.jsx';
 import Designation from './admin/Designation.jsx'
 import MapSection from './admin/MapSection.jsx'
+import NoticeBoard from './admin/NoticeBoard.jsx';
+import PhotoGallery from './admin/PhotoGallery.jsx';
 
 const AdminRoutes = () => {
   return (
@@ -20,7 +22,8 @@ const AdminRoutes = () => {
       <Route path="/admin/cancelled-tenders" element={<CancelledTender />} />
       <Route path="/admin/transfer-posting" element={<TransferPosting />} />
       <Route path="/admin/office-order" element={<AdminOfficeOrder />} />
-
+      <Route path="/admin/notice-board" element={<NoticeBoard/> } />
+      <Route path="/admin/photo-gallery" element={<PhotoGallery/> } />
 
 <Route path="/admin/designation-master" element={<Designation/> } />
       <Route path="/admin/map-section" element={<MapSection/> } />

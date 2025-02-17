@@ -30,7 +30,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AdminHeader from "./Components/AdminHeader";
 import SidebarMenu from "./Components/SideBarMenu";
 
-const Notification = () => {
+const NoticeBoard = () => {
   const [tabValue, setTabValue] = useState(0);
   const [files, setFiles] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
@@ -168,7 +168,7 @@ const Notification = () => {
             <Tab label="View" />
           </Tabs>
           <Typography variant="h5" sx={{ mb: 2 }}>
-            Add Notification
+            Add Notice Board
           </Typography>
           {tabValue === 0 && (
             <Box component="form" noValidate autoComplete="off">
@@ -413,4 +413,4 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+export default NoticeBoard;
