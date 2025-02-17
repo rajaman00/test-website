@@ -13,10 +13,12 @@ import {
   IconButton,
   Typography,
   Grid,
+  Pagination,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AdminHeader from "./Components/AdminHeader";
 import SidebarMenu from "./Components/SideBarMenu";
+import * as XLSX from "xlsx"; // Import the xlsx library
 
 const DesignationForm = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -25,6 +27,8 @@ const DesignationForm = () => {
     designation: "",
     priority: "",
   });
+  const [currentPage, setCurrentPage] = useState(1); // State for current page
+  const itemsPerPage = 10; // Number of items per page
 
   // Handle tab switch
   const handleTabChange = (event, newValue) => {
@@ -58,6 +62,31 @@ const DesignationForm = () => {
   const handleDelete = (id) => {
     setDesignations(designations.filter((item) => item.id !== id));
   };
+
+  // Handle export to Excel
+  const handleExportToExcel = () => {
+    // Create a worksheet from the designations data
+    const worksheet = XLSX.utils.json_to_sheet(designations);
+    // Create a new workbook and append the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Designations");
+    // Generate Excel file and trigger download
+    XLSX.writeFile(workbook, "Designations.xlsx");
+  };
+
+  // Handle page change
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(designations.length / itemsPerPage);
+
+  // Get the data for the current page
+  const currentData = designations.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <>
@@ -123,36 +152,61 @@ const DesignationForm = () => {
           )}
 
           {tabValue === 1 && (
-            <Table>
-              <TableHead sx={{ backgroundColor: "#f5f5f5" }}>
-                <TableRow>
-                  <TableCell><b>Designation</b></TableCell>
-                  <TableCell><b>Priority</b></TableCell>
-                  <TableCell><b>Actions</b></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {designations.length > 0 ? (
-                  designations.map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell>{item.designation}</TableCell>
-                      <TableCell>{item.priority}</TableCell>
-                      <TableCell>
-                        <IconButton color="error" onClick={() => handleDelete(item.id)}>
-                          <DeleteIcon />
-                        </IconButton>
+            <Box>
+              {/* Export to Excel Button */}
+              <Button
+                variant="contained"
+                color="success"
+                onClick={handleExportToExcel}
+                sx={{ mb: 2 }}
+              >
+                Export to Excel
+              </Button>
+
+              {/* Table to display designations */}
+              <Table>
+                <TableHead sx={{ backgroundColor: "#f5f5f5" }}>
+                  <TableRow>
+                    <TableCell><b>Designation</b></TableCell>
+                    <TableCell><b>Priority</b></TableCell>
+                    <TableCell><b>Actions</b></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {currentData.length > 0 ? (
+                    currentData.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell>{item.designation}</TableCell>
+                        <TableCell>{item.priority}</TableCell>
+                        <TableCell>
+                          <IconButton color="error" onClick={() => handleDelete(item.id)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={3} align="center">
+                        No records found.
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={3} align="center">
-                      No records found.
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+
+              {/* Pagination */}
+              {designations.length > itemsPerPage && (
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                  <Pagination
+                    count={totalPages}
+                    page={currentPage}
+                    onChange={handlePageChange}
+                    color="primary"
+                  />
+                </Box>
+              )}
+            </Box>
           )}
         </Box>
       </Box>
