@@ -27,8 +27,7 @@ import AdminHeader from './Components/AdminHeader';
 function PhotoGallery() {
   const [tabIndex, setTabIndex] = useState(0);
   const [heading, setHeading] = useState(''); // For heading input
-  const [imageFile, setImageFile] = useState(null); // For image upload
-  const [pdfFile, setPdfFile] = useState(null); // For PDF upload
+  const [imageFiles, setImageFiles] = useState([]); // For multiple image uploads
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false); // For upload confirmation
   const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false); // For submit confirmation
   const [submitEvent, setSubmitEvent] = useState(null); // Store the submit event
@@ -44,17 +43,9 @@ function PhotoGallery() {
   };
 
   const handleImageUpload = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      setImageFile(selectedFile);
-      setIsUploadDialogOpen(true); // Open upload confirmation dialog
-    }
-  };
-
-  const handlePdfUpload = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      setPdfFile(selectedFile);
+    const selectedFiles = Array.from(event.target.files); // Convert FileList to array
+    if (selectedFiles.length > 0) {
+      setImageFiles(selectedFiles);
       setIsUploadDialogOpen(true); // Open upload confirmation dialog
     }
   };
@@ -62,11 +53,9 @@ function PhotoGallery() {
   const handleUploadConfirmation = (confirmed) => {
     if (confirmed) {
       // Handle confirmed upload (e.g., display file names)
-      console.log('Image File:', imageFile?.name);
-      console.log('PDF File:', pdfFile?.name);
+      console.log('Selected Images:', imageFiles.map(file => file.name));
     } else {
-      setImageFile(null); // Clear the image file if not confirmed
-      setPdfFile(null); // Clear the PDF file if not confirmed
+      setImageFiles([]); // Clear the image files if not confirmed
     }
     setIsUploadDialogOpen(false); // Close the dialog
   };
@@ -82,16 +71,14 @@ function PhotoGallery() {
       const newGalleryItem = {
         id: Date.now(), // Simulating unique ID
         heading: heading,
-        imageFile: imageFile?.name || 'No Image Uploaded',
-        pdfFile: pdfFile?.name || 'No PDF Uploaded',
+        imageFiles: imageFiles.map(file => file.name), // Store image file names
       };
 
       setGalleryItems((prev) => [...prev, newGalleryItem]);
 
       // Reset form fields
       setHeading('');
-      setImageFile(null);
-      setPdfFile(null);
+      setImageFiles([]);
     }
     setIsSubmitDialogOpen(false); // Close the dialog
     setSubmitEvent(null); // Clear the stored event
@@ -180,43 +167,18 @@ function PhotoGallery() {
                             '&:hover': { backgroundColor: '#1976d2' },
                           }}
                         >
-                          Upload Image
+                          Upload Images
                           <input
                             type="file"
                             hidden
                             accept="image/*"
                             onChange={handleImageUpload}
+                            multiple // Allow multiple file selection
                           />
                         </Button>
-                        {imageFile && (
+                        {imageFiles.length > 0 && (
                           <Typography variant="body2" sx={{ mt: 1 }}>
-                            Selected Image: {imageFile.name}
-                          </Typography>
-                        )}
-                      </Grid>
-
-                      {/* PDF Upload */}
-                      <Grid item xs={12}>
-                        <Button
-                          variant="contained"
-                          component="label"
-                          sx={{
-                            backgroundColor: '#2196f3',
-                            color: '#fff',
-                            '&:hover': { backgroundColor: '#1976d2' },
-                          }}
-                        >
-                          Upload PDF
-                          <input
-                            type="file"
-                            hidden
-                            accept="application/pdf"
-                            onChange={handlePdfUpload}
-                          />
-                        </Button>
-                        {pdfFile && (
-                          <Typography variant="body2" sx={{ mt: 1 }}>
-                            Selected PDF: {pdfFile.name}
+                            Selected Images: {imageFiles.map(file => file.name).join(', ')}
                           </Typography>
                         )}
                       </Grid>
@@ -249,8 +211,7 @@ function PhotoGallery() {
                         <TableRow>
                           <TableCell>Sl. No.</TableCell>
                           <TableCell>Heading</TableCell>
-                          <TableCell>Image File</TableCell>
-                          <TableCell>PDF File</TableCell>
+                          <TableCell>Image Files</TableCell>
                           <TableCell>Actions</TableCell>
                         </TableRow>
                       </TableHead>
@@ -259,8 +220,9 @@ function PhotoGallery() {
                           <TableRow key={item.id}>
                             <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
                             <TableCell>{item.heading}</TableCell>
-                            <TableCell>{item.imageFile}</TableCell>
-                            <TableCell>{item.pdfFile}</TableCell>
+                            <TableCell>
+                              {item.imageFiles.join(', ')} {/* Display all image file names */}
+                            </TableCell>
                             <TableCell>
                               <IconButton color="primary" onClick={() => handleEdit(item)}>
                                 <Edit />
@@ -296,7 +258,7 @@ function PhotoGallery() {
       <Dialog open={isUploadDialogOpen} onClose={() => handleUploadConfirmation(false)}>
         <DialogTitle>Confirm Upload</DialogTitle>
         <DialogContent>
-          <Typography>Do you want to upload the selected files?</Typography>
+          <Typography>Do you want to upload the selected images?</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => handleUploadConfirmation(false)} color="secondary">
