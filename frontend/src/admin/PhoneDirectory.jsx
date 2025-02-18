@@ -19,10 +19,12 @@ import {
   TableRow,
   Paper,
   IconButton,
+  Pagination,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import SidebarMenu from "./Components/SideBarMenu";
 import AdminHeader from "./Components/AdminHeader";
+import * as XLSX from "xlsx"; // Import xlsx library
 
 const PhoneDirectory = () => {
   const [formData, setFormData] = useState({
@@ -40,6 +42,10 @@ const PhoneDirectory = () => {
   const [contacts, setContacts] = useState([]); // State to store added contacts
   const [activeTab, setActiveTab] = useState(0); // State to manage active tab
   const [editIndex, setEditIndex] = useState(null); // State to track the contact being edited
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Number of items per page
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -90,6 +96,25 @@ const PhoneDirectory = () => {
     setActiveTab(newValue);
   };
 
+  // Function to export contacts to Excel
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(contacts);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Contacts");
+    XLSX.writeFile(workbook, "contacts.xlsx");
+  };
+
+  // Pagination logic
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  // Calculate the contacts to display for the current page
+  const paginatedContacts = contacts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <>
       <AdminHeader />
@@ -121,11 +146,13 @@ const PhoneDirectory = () => {
                 {/* Zone */}
                 <Grid item xs={12}>
                   <FormControl fullWidth required>
-                    <InputLabel>Zone</InputLabel>
+                    <InputLabel shrink={!!formData.zone}>Zone</InputLabel>
                     <Select
                       name="zone"
                       value={formData.zone}
                       onChange={handleChange}
+                      label="Zone"
+                      notched
                     >
                       <MenuItem value="">-Select-</MenuItem>
                       <MenuItem value="North">North</MenuItem>
@@ -161,11 +188,15 @@ const PhoneDirectory = () => {
                 {/* Designation */}
                 <Grid item xs={12}>
                   <FormControl fullWidth required>
-                    <InputLabel>Designation</InputLabel>
+                    <InputLabel shrink={!!formData.designation}>
+                      Designation
+                    </InputLabel>
                     <Select
                       name="designation"
                       value={formData.designation}
                       onChange={handleChange}
+                      label="Designation"
+                      notched
                     >
                       <MenuItem value="">-Select-</MenuItem>
                       <MenuItem value="Manager">Manager</MenuItem>
@@ -252,6 +283,14 @@ const PhoneDirectory = () => {
               <Typography variant="h6" fontWeight="bold">
                 View Contacts
               </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={exportToExcel}
+                sx={{ mb: 2 }}
+              >
+                Export to Excel
+              </Button>
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
@@ -265,7 +304,7 @@ const PhoneDirectory = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {contacts.map((contact, index) => (
+                    {paginatedContacts.map((contact, index) => (
                       <TableRow key={index}>
                         <TableCell>{contact.name}</TableCell>
                         <TableCell>{contact.designation}</TableCell>
@@ -273,10 +312,10 @@ const PhoneDirectory = () => {
                         <TableCell>{contact.mobileNo}</TableCell>
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>
-                          <IconButton onClick={() => handleEdit(index)}>
+                          <IconButton onClick={() => handleEdit(index + (currentPage - 1) * itemsPerPage)}>
                             <Edit />
                           </IconButton>
-                          <IconButton onClick={() => handleDelete(index)}>
+                          <IconButton onClick={() => handleDelete(index + (currentPage - 1) * itemsPerPage)}>
                             <Delete />
                           </IconButton>
                         </TableCell>
@@ -285,6 +324,15 @@ const PhoneDirectory = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+              {/* Pagination */}
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+                <Pagination
+                  count={Math.ceil(contacts.length / itemsPerPage)}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  color="primary"
+                />
+              </Box>
             </Box>
           )}
         </Box>

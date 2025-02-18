@@ -26,18 +26,21 @@ import AdminHeader from './Components/AdminHeader';
 
 function ReportsAccounts() {
   const [tabIndex, setTabIndex] = useState(0);
-  const [heading, setHeading] = useState(''); // For heading input
-  const [imageFile, setImageFile] = useState(null); // For image upload
-  const [pdfFile, setPdfFile] = useState(null); // For PDF upload
-  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false); // For upload confirmation
-  const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false); // For submit confirmation
-  const [submitEvent, setSubmitEvent] = useState(null); // Store the submit event
+  const [reportTitle, setReportTitle] = useState('');
+  const [reportImage, setReportImage] = useState(null);
+  const [reportPdf, setReportPdf] = useState(null);
+  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
+  const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
+  const [submitEvent, setSubmitEvent] = useState(null);
 
-  const [galleryItems, setGalleryItems] = useState([]); // To store gallery items
+  const [reportsList, setReportsList] = useState([]);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Number of items per page
+  const itemsPerPage = 10;
+
+  // State for edit mode
+  const [editingReport, setEditingReport] = useState(null);
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
@@ -46,65 +49,92 @@ function ReportsAccounts() {
   const handleImageUpload = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
-      setImageFile(selectedFile);
-      setIsUploadDialogOpen(true); // Open upload confirmation dialog
+      setReportImage(selectedFile);
+      setIsUploadDialogOpen(true);
     }
   };
 
   const handlePdfUpload = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
-      setPdfFile(selectedFile);
-      setIsUploadDialogOpen(true); // Open upload confirmation dialog
+      setReportPdf(selectedFile);
+      setIsUploadDialogOpen(true);
     }
   };
 
   const handleUploadConfirmation = (confirmed) => {
     if (confirmed) {
-      // Handle confirmed upload (e.g., display file names)
-      console.log('Image File:', imageFile?.name);
-      console.log('PDF File:', pdfFile?.name);
+      console.log('Report Image:', reportImage?.name);
+      console.log('Report PDF:', reportPdf?.name);
     } else {
-      setImageFile(null); // Clear the image file if not confirmed
-      setPdfFile(null); // Clear the PDF file if not confirmed
+      setReportImage(null);
+      setReportPdf(null);
     }
-    setIsUploadDialogOpen(false); // Close the dialog
+    setIsUploadDialogOpen(false);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitEvent(event); // Store the event
-    setIsSubmitDialogOpen(true); // Open submit confirmation dialog
+    setSubmitEvent(event);
+    setIsSubmitDialogOpen(true);
   };
 
   const handleSubmitConfirmation = (confirmed) => {
     if (confirmed && submitEvent) {
-      const newGalleryItem = {
-        id: Date.now(), // Simulating unique ID
-        heading: heading,
-        imageFile: imageFile?.name || 'No Image Uploaded',
-        pdfFile: pdfFile?.name || 'No PDF Uploaded',
-      };
-
-      setGalleryItems((prev) => [...prev, newGalleryItem]);
+      if (editingReport) {
+        // Update existing report
+        setReportsList((prev) =>
+          prev.map((report) =>
+            report.id === editingReport.id
+              ? {
+                  ...report,
+                  title: reportTitle,
+                  imageFile: reportImage?.name || report.imageFile,
+                  pdfFile: reportPdf?.name || report.pdfFile,
+                }
+              : report
+          )
+        );
+        setEditingReport(null); // exit edit mode
+      } else {
+        // Add new report
+        const newReport = {
+          id: Date.now(),
+          title: reportTitle,
+          imageFile: reportImage?.name || 'No Image Uploaded',
+          pdfFile: reportPdf?.name || 'No PDF Uploaded',
+        };
+        setReportsList((prev) => [...prev, newReport]);
+      }
 
       // Reset form fields
-      setHeading('');
-      setImageFile(null);
-      setPdfFile(null);
+      setReportTitle('');
+      setReportImage(null);
+      setReportPdf(null);
     }
-    setIsSubmitDialogOpen(false); // Close the dialog
-    setSubmitEvent(null); // Clear the stored event
+    setIsSubmitDialogOpen(false);
+    setSubmitEvent(null);
   };
 
-  const handleEdit = (item) => {
-    // Implement edit functionality if needed
-    console.log('Edit item:', item);
+  const handleEdit = (report) => {
+    setEditingReport(report);
+    setReportTitle(report.title);
+    // Reset file inputs to let user re-select if needed
+    setReportImage(null);
+    setReportPdf(null);
+    setTabIndex(0); // switch to "Add Report" tab
   };
 
   const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this item?')) {
-      setGalleryItems((prev) => prev.filter((item) => item.id !== id));
+    if (window.confirm('Are you sure you want to delete this report?')) {
+      setReportsList((prev) => {
+        const updatedList = prev.filter((report) => report.id !== id);
+        // Adjust current page if the last item on the page is deleted
+        if (updatedList.length <= (currentPage - 1) * itemsPerPage && currentPage > 1) {
+          setCurrentPage(currentPage - 1);
+        }
+        return updatedList;
+      });
     }
   };
 
@@ -113,10 +143,18 @@ function ReportsAccounts() {
     setCurrentPage(page);
   };
 
-  const paginatedGalleryItems = galleryItems.slice(
+  const paginatedReports = reportsList.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  // Optional: A reset function to clear the form (and cancel edit mode)
+  const handleReset = () => {
+    setReportTitle('');
+    setReportImage(null);
+    setReportPdf(null);
+    setEditingReport(null);
+  };
 
   return (
     <>
@@ -139,14 +177,14 @@ function ReportsAccounts() {
                 <Tabs
                   value={tabIndex}
                   onChange={handleTabChange}
-                  aria-label="Photo Gallery Tabs"
+                  aria-label="Reports and Accounts Tabs"
                   textColor="primary"
                   indicatorColor="primary"
                   centered
                   sx={{ '& .MuiTab-root': { fontSize: '0.9rem', fontWeight: 500 } }}
                 >
-                  <Tab label="Add" />
-                  <Tab label="View" />
+                  <Tab label="Add Report" />
+                  <Tab label="View Reports" />
                 </Tabs>
               </Box>
 
@@ -154,16 +192,16 @@ function ReportsAccounts() {
                 {tabIndex === 0 && (
                   <form onSubmit={handleSubmit}>
                     <Typography variant="h6" gutterBottom>
-                      Add Photo Gallery Item
+                      {editingReport ? 'Edit Report' : 'Add Report'}
                     </Typography>
                     <Grid container spacing={2}>
-                      {/* Heading Input */}
+                      {/* Report Title Input */}
                       <Grid item xs={12}>
                         <TextField
                           fullWidth
-                          label="Heading"
-                          value={heading}
-                          onChange={(e) => setHeading(e.target.value)}
+                          label="Report Title"
+                          value={reportTitle}
+                          onChange={(e) => setReportTitle(e.target.value)}
                           variant="outlined"
                           size="small"
                         />
@@ -188,9 +226,9 @@ function ReportsAccounts() {
                             onChange={handleImageUpload}
                           />
                         </Button>
-                        {imageFile && (
+                        {reportImage && (
                           <Typography variant="body2" sx={{ mt: 1 }}>
-                            Selected Image: {imageFile.name}
+                            Selected Image: {reportImage.name}
                           </Typography>
                         )}
                       </Grid>
@@ -214,9 +252,9 @@ function ReportsAccounts() {
                             onChange={handlePdfUpload}
                           />
                         </Button>
-                        {pdfFile && (
+                        {reportPdf && (
                           <Typography variant="body2" sx={{ mt: 1 }}>
-                            Selected PDF: {pdfFile.name}
+                            Selected PDF: {reportPdf.name}
                           </Typography>
                         )}
                       </Grid>
@@ -231,9 +269,9 @@ function ReportsAccounts() {
                           '&:hover': { backgroundColor: '#1976d2' },
                         }}
                       >
-                        Submit
+                        {editingReport ? 'Update' : 'Submit'}
                       </Button>
-                      <Button variant="outlined" color="secondary">
+                      <Button variant="outlined" color="secondary" onClick={handleReset}>
                         Reset
                       </Button>
                     </Box>
@@ -242,32 +280,37 @@ function ReportsAccounts() {
                 {tabIndex === 1 && (
                   <Box p={3}>
                     <Typography variant="h6" gutterBottom>
-                      Gallery Items
+                      Reports List
                     </Typography>
                     <Table>
                       <TableHead>
                         <TableRow>
                           <TableCell>Sl. No.</TableCell>
-                          <TableCell>Heading</TableCell>
+                          <TableCell>Report Title</TableCell>
                           <TableCell>Image File</TableCell>
                           <TableCell>PDF File</TableCell>
                           <TableCell>Actions</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {paginatedGalleryItems.map((item, index) => (
-                          <TableRow key={item.id}>
-                            <TableCell>{(currentPage - 1) * itemsPerPage + index + 1}</TableCell>
-                            <TableCell>{item.heading}</TableCell>
-                            <TableCell>{item.imageFile}</TableCell>
-                            <TableCell>{item.pdfFile}</TableCell>
+                        {paginatedReports.map((report, index) => (
+                          <TableRow key={report.id}>
                             <TableCell>
-                              <IconButton color="primary" onClick={() => handleEdit(item)}>
+                              {(currentPage - 1) * itemsPerPage + index + 1}
+                            </TableCell>
+                            <TableCell>{report.title}</TableCell>
+                            <TableCell>{report.imageFile}</TableCell>
+                            <TableCell>{report.pdfFile}</TableCell>
+                            <TableCell>
+                              <IconButton
+                                color="primary"
+                                onClick={() => handleEdit(report)}
+                              >
                                 <Edit />
                               </IconButton>
                               <IconButton
                                 color="secondary"
-                                onClick={() => handleDelete(item.id)}
+                                onClick={() => handleDelete(report.id)}
                               >
                                 <Delete />
                               </IconButton>
@@ -278,7 +321,7 @@ function ReportsAccounts() {
                     </Table>
                     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
                       <Pagination
-                        count={Math.ceil(galleryItems.length / itemsPerPage)}
+                        count={Math.ceil(reportsList.length / itemsPerPage)}
                         page={currentPage}
                         onChange={handlePageChange}
                         color="primary"
@@ -293,7 +336,10 @@ function ReportsAccounts() {
       </Grid>
 
       {/* Upload Confirmation Dialog */}
-      <Dialog open={isUploadDialogOpen} onClose={() => handleUploadConfirmation(false)}>
+      <Dialog
+        open={isUploadDialogOpen}
+        onClose={() => handleUploadConfirmation(false)}
+      >
         <DialogTitle>Confirm Upload</DialogTitle>
         <DialogContent>
           <Typography>Do you want to upload the selected files?</Typography>
@@ -309,7 +355,10 @@ function ReportsAccounts() {
       </Dialog>
 
       {/* Submit Confirmation Dialog */}
-      <Dialog open={isSubmitDialogOpen} onClose={() => handleSubmitConfirmation(false)}>
+      <Dialog
+        open={isSubmitDialogOpen}
+        onClose={() => handleSubmitConfirmation(false)}
+      >
         <DialogTitle>Confirm Submission</DialogTitle>
         <DialogContent>
           <Typography>Do you want to submit the form?</Typography>
