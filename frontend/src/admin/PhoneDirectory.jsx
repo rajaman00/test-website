@@ -47,8 +47,61 @@ const PhoneDirectory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
 
+  // Mapping of zones to circles
+  const zoneToCircles = {
+    Patna: ["Kaimur", "Buxar", "Bhojpur", "Patna"],
+    Muzaffarpur: [
+      "Pashchim Champaran",
+      "Purba Champaran",
+      "Sheohar",
+      "Muzaffarpur",
+      "Vaishali",
+      "Saran",
+      "Siwan",
+      "Gopalganj",
+      "Samastipur",
+      "Sitamarhi",
+    ],
+    Koshi: [
+      "Madhubani",
+      "Darbhanga",
+      "Supaul",
+      "Saharsa",
+      "Madhepura",
+      "Araria",
+      "Purnia",
+      "Kishanganj",
+      "Katihar",
+    ],
+    Bhagalpur: [
+      "Bhagalpur",
+      "Banka",
+      "Jamui",
+      "Lakhisarai",
+      "Munger",
+      "Khagaria",
+      "Begusarai",
+    ],
+    Gaya: [
+      "Rohtas",
+      "Arwal",
+      "Jehanabad",
+      "Gaya",
+      "Nalanda",
+      "Nawada",
+      "Sheikhpura",
+      "Aurangabad",
+    ],
+  };
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Reset circle when zone changes
+    if (name === "zone") {
+      setFormData((prevData) => ({ ...prevData, circle: "" }));
+    }
   };
 
   const handleReset = () => {
@@ -155,22 +208,36 @@ const PhoneDirectory = () => {
                       notched
                     >
                       <MenuItem value="">-Select-</MenuItem>
-                      <MenuItem value="North">North</MenuItem>
-                      <MenuItem value="South">South</MenuItem>
+                      <MenuItem value="Patna">Patna</MenuItem>
+                      <MenuItem value="Muzaffarpur">Muzaffarpur</MenuItem>
+                      <MenuItem value="Koshi">Koshi</MenuItem>
+                      <MenuItem value="Bhagalpur">Bhagalpur</MenuItem>
+                      <MenuItem value="Gaya">Gaya</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
 
                 {/* Circle */}
                 <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    required
-                    label="Circle"
-                    name="circle"
-                    value={formData.circle}
-                    onChange={handleChange}
-                  />
+                  <FormControl fullWidth required>
+                    <InputLabel shrink={!!formData.circle}>Circle</InputLabel>
+                    <Select
+                      name="circle"
+                      value={formData.circle}
+                      onChange={handleChange}
+                      label="Circle"
+                      notched
+                      disabled={!formData.zone} // Disable if no zone is selected
+                    >
+                      <MenuItem value="">-Select-</MenuItem>
+                      {formData.zone &&
+                        zoneToCircles[formData.zone].map((circle) => (
+                          <MenuItem key={circle} value={circle}>
+                            {circle}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
 
                 {/* Name */}

@@ -12,6 +12,11 @@ import MapSection from './admin/MapSection.jsx'
 import NoticeBoard from './admin/NoticeBoard.jsx';
 import PhotoGallery from './admin/PhotoGallery.jsx';
 import PhoneDirectory from './admin/PhoneDirectory.jsx';
+import AboutImages from './admin/AboutImages.jsx';
+import Transmission from './admin/Transmission.jsx';
+import Grids from './admin/Grids.jsx';
+import UpcomingTransmission from './admin/UpcomingTransmission.jsx';
+import UpcomingGrids from './admin/UpcominGrids.jsx';
 
 const AdminRoutes = () => {
   return (
@@ -29,6 +34,12 @@ const AdminRoutes = () => {
 
 <Route path="/admin/designation-master" element={<Designation/> } />
       <Route path="/admin/map-section" element={<MapSection/> } />
+
+      <Route path="/admin/about-images" element={<AboutImages/> } />
+      <Route path="/admin/transmission" element={<Transmission/> } />
+      <Route path="/admin/grids" element={<Grids/> } />
+      <Route path="/admin/upcoming-transmission" element={<UpcomingTransmission/> } />
+      <Route path="/admin/upcoming-grids" element={<UpcomingGrids/> } />
     </Routes>
   );
 };

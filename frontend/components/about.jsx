@@ -6,6 +6,7 @@ import cmImage from '../public/images/AboutImages/nitishkumar.jpg';
 import EnergyMinister from '../public/images/AboutImages/Energy Minister.jpg';
 import md from '../public/images/AboutImages/New MD Sir.jpeg.jpg'
 import cmd from '../public/images/AboutImages/cmd.jpg';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -14,6 +15,14 @@ function About() {
         AOS.init();
         AOS.refresh();
     }, []);
+
+    const { i18n } = useTranslation();
+
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+    };
+
+    const { t } = useTranslation();
     return (
         <>
             {/* about section start */}
@@ -22,11 +31,11 @@ function About() {
                 <div className="aboutText" data-aos="fade-up" data-aos-easing="ease-out-cubic"
                     data-aos-duration="2000">
 
-                    <h3 className="decorative-heading">About Us</h3>
+                    <h3 className="decorative-heading">{t('about-us')}</h3>
                     {/* <h3 style={{ textAlign: 'center', fontStyle: 'italic', fontSize: '3rem', fontFamily: 'Brush Script MT, cursive' }}>About Us </h3> */}
 
-                    <p style={{ textAlign: 'justify' }}>Bihar State Power Transmission Company Limited, a subsidiary company of Bihar State Power (Holding) Company Limited, is a Government of Bihar wholly owned corporate entity incorporated under the Companies Act 1956 on 1st Nov, 2012 after restructuring of erstwhile Bihar State Electricity Board. It carries out intra-state transmission and wheeling of electricity under license issued by the Bihar Electricity Regulatory Commission. It also discharges the functions of State Load Despatch Centre (SLDC) of Bihar.               </p>
-                    <br /><br /><button className="view-more-button">View More</button>
+                    <p style={{ textAlign: 'justify' }}> {t('about-section-text')}             </p>
+                    <br /><br /><button className="view-more-button">{t('view-more')}</button>
                 </div>
 
                 <div className="aboutImage" data-aos="fade-up" data-aos-easing="ease-out-cubic"

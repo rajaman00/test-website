@@ -202,7 +202,7 @@ function NavigationBar() {
                     <Link to="">An ISO 27001:2013 Company</Link>
                 </div>
                 <div className="rightSideDisplay">
-                    <button onClick={skipToMainContent} style={{ cursor: 'pointer', borderRight: '1px solid gray' }}>{t('Skip to Main Content')}</button>
+                    <button onClick={skipToMainContent} style={{ cursor: 'pointer', borderRight: '1px solid gray' }}>{t('skip-to-main-content')}</button>
                     <hr />
                     <Link to="/screen-reader" style={{ borderRight: '1px solid gray' }}>Screen Reader</Link>
                     <button onClick={decreaseFontSize} style={{ cursor: 'pointer' }}>A-</button>
@@ -255,7 +255,7 @@ function NavigationBar() {
                                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                                 <Navbar.Collapse id="responsive-navbar-nav">
                                     <Nav className="ms-auto">
-                                        
+
                                         {/* ----About Us--- */}
                                         <li className='navLink'
                                             onMouseOver={() => setAboutHovered(true)}
@@ -263,15 +263,15 @@ function NavigationBar() {
                                             {t('about')}<span style={{ color: '#db8204' }}></span>
                                             {isAboutHovered && (
 
-                                                <div className='AboutDropDown'><div style={{height:'1rem', width:'100%', flexOrder:'1'}}></div>
+                                                <div className='AboutDropDown'><div style={{ height: '1rem', width: '100%', flexOrder: '1' }}></div>
                                                     <div className='triangle AboutTrianglePosition' ><img className='triangleImage' src={triangleImage} alt="" /></div>
                                                     <div className='dropDownMenu'>
                                                         < Link to="/company-overview" className='dropdownMenuText' >{t('overview')}</Link>
                                                         < Link to='/board-directors' className='dropdownMenuText' >{t('directors')}</Link>
                                                         < Link to='/organization-structure' className='dropdownMenuText'>{t('org_strct')}</Link>
-                                                        < Link to='/awards-achievements' className='dropdownMenuText' >Awards & Achievements</Link>
-                                                        < Link to='/certificates' className='dropdownMenuText' >Certificates</Link>
-                                                        < Link to='/annual-reports' className='dropdownMenuText' >Reports and Accounts</Link>
+                                                        < Link to='/awards-achievements' className='dropdownMenuText' >{t('award-achievement')}</Link>
+                                                        < Link to='/certificates' className='dropdownMenuText' >{t('certificate')}</Link>
+                                                        < Link to='/annual-reports' className='dropdownMenuText' >{t('reprots-accounts')}</Link>
                                                     </div>
                                                 </div>
                                             )}
@@ -282,62 +282,62 @@ function NavigationBar() {
                                             onMouseOver={() => setTransmissionHovered(true)}
                                             onMouseLeave={() => setTransmissionHovered(false)}
                                         >
-                                            Transmission N/W
+                                            {t('transmission-n/w')}
                                             {isTransmissionHovered && (
-                                                <div className='transmissionDropDown'><div style={{height:'1rem', width:'100%', flexOrder:'1'}}></div>
-                                                     <div className='triangle transmissionTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
+                                                <div className='transmissionDropDown'><div style={{ height: '1rem', width: '100%', flexOrder: '1' }}></div>
+                                                    <div className='triangle transmissionTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
                                                     <div className='dropDownMenu'>
-                                                        < Link  className='dropdownMenuText'
+                                                        < Link className='dropdownMenuText'
                                                             onMouseOver={() => setCurInfrastructureHovered(true)}
                                                             onMouseLeave={() => setCurInfrastructureHovered(false)}>
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>Current Infrastructure<span style={{ color: '#db8204', fontSize: '18px' }}><GoTriangleRight /></span></div>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>{t('current-infrastrucrure')}<span style={{ color: '#db8204', fontSize: '18px' }}><GoTriangleRight /></span></div>
                                                             {isCurInfrastructureHovered && (
                                                                 <div className='CurInfrastructureDropDown'>
                                                                     <div className='dropDownMenu'>
-                                                                        < Link to='/transmission-lines' className='dropdownMenuText'>Transmission Lines</Link>
-                                                                        < Link to='/grids' className='dropdownMenuText'>Grids</Link>
+                                                                        < Link to='/transmission-lines' className='dropdownMenuText'>{t('transmission-lines')}</Link>
+                                                                        < Link to='/grids' className='dropdownMenuText'>{t('grids')}</Link>
                                                                     </div>
                                                                 </div>
                                                             )}
                                                         </Link>
                                                         <Link
                                                             to="public/Documents/Bihar-Power-Map.pdf"
-                                                           className='dropdownMenuText'            
+                                                            className='dropdownMenuText'
                                                             onClick={(e) => {
                                                                 e.preventDefault(); // Prevent default handling
                                                                 window.open("/Documents/Bihar-Power-Map.pdf", "_blank"); // Open the PDF in a new tab
                                                             }}
                                                         >
-                                                            Power Map
+                                                            {t('power-map')}
                                                         </Link>
-                                                        <div className='dropdownMenuText' 
+                                                        <div className='dropdownMenuText'
                                                             onMouseOver={() => setSysParametersHovered(true)}
                                                             onMouseLeave={() => setSysParametersHovered(false)}>
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}> System Parameters<span style={{ color: '#db8204', fontSize: '18px' }}><GoTriangleRight /></span></div>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>{t('system-parameters')}<span style={{ color: '#db8204', fontSize: '18px' }}><GoTriangleRight /></span></div>
                                                             {isSysParametersHovered && (
                                                                 <div className='SysParametersDropDown'>
                                                                     <div className='dropDownMenu'>
-                                                                        < Link to='/TAFM'className='dropdownMenuText'>TAFM</Link>
-                                                                        < Link to='/atc-ttc' className='dropdownMenuText'>ATC/TTC</Link>
-                                                                        < Link to='/peak-demand-met' className='dropdownMenuText'>Peak Demand Met</Link>
-                                                                        < Link className='dropdownMenuText'>Load Pattern</Link>
-                                                                        < Link className='dropdownMenuText'>ARR</Link>
+                                                                        < Link to='/TAFM' className='dropdownMenuText'>{t('tafm')}</Link>
+                                                                        < Link to='/atc-ttc' className='dropdownMenuText'>{t('atc/ttc')}</Link>
+                                                                        < Link to='/peak-demand-met' className='dropdownMenuText'>{t('peak-demand-met')}</Link>
+                                                                        < Link className='dropdownMenuText'>{t('load-pattern')}</Link>
+                                                                        < Link className='dropdownMenuText'>{t('arp')}</Link>
                                                                     </div>
                                                                 </div>
 
                                                             )}
 
                                                         </div>
-                                                        < Link className='dropdownMenuText'>Transmission Loss</Link>
+                                                        < Link className='dropdownMenuText'>{t('transmission-loss')}</Link>
                                                         < Link className='dropdownMenuText'
                                                             onMouseOver={() => setUpcomInfrastructureHovered(true)}
                                                             onMouseLeave={() => setUpcomInfrastructureHovered(false)}>
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>Upcoming Infrastructure<span style={{ color: '#db8204' , fontSize: '18px'}}><GoTriangleRight /></span></div>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>{t('upcoming-infrastructure')}<span style={{ color: '#db8204', fontSize: '18px' }}><GoTriangleRight /></span></div>
                                                             {isUpcomInfrastructureHovered && (
                                                                 <div className='UpcomInfrastructureDropDown'>
                                                                     <div className='dropDownMenu'>
-                                                                        < Link to='/upcoming-transmission-lines' className='dropdownMenuText'>Transmission Lines</Link>
-                                                                        < Link to='/upcoming-grids' className='dropdownMenuText'>Grids</Link>
+                                                                        < Link to='/upcoming-transmission-lines' className='dropdownMenuText'>{t('transmission-lines')}</Link>
+                                                                        < Link to='/upcoming-grids' className='dropdownMenuText'>{t('grids')}</Link>
                                                                     </div>
                                                                 </div>
 
@@ -355,16 +355,16 @@ function NavigationBar() {
                                             onMouseOver={() => setMediaHovered(true)}
                                             onMouseLeave={() => setMediaHovered(false)}
                                         >
-                                            Media <span style={{ color: '#db8204' }}></span>
+                                            {t('media')}<span style={{ color: '#db8204' }}></span>
                                             {isMediaHovered && (
-                                                <div className='mediaDropDown'><div style={{height:'1rem', width:'100%', flexOrder:'1'}}></div>
-                                                     <div className='triangle mediaTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
+                                                <div className='mediaDropDown'><div style={{ height: '1rem', width: '100%', flexOrder: '1' }}></div>
+                                                    <div className='triangle mediaTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
                                                     <div className='dropDownMenu'>
-                                                        <Link to='/annual-reports' className='dropdownMenuText'>Reports/Compendium</Link>
-                                                        <Link to='/e-magazine' className='dropdownMenuText'>e-Magazine</Link>
-                                                        <Link to='/photo-gallery' className='dropdownMenuText'>Photo Gallery</Link>
-                                                        <Link to='/twitter' className='dropdownMenuText'>Twitter</Link>
-                                                        <Link to='/newspaper-clippings' className='dropdownMenuText'>Newspaper Clippings</Link>
+                                                        <Link to='/annual-reports' className='dropdownMenuText'>{t('reports/compendium')}</Link>
+                                                        <Link to='/e-magazine' className='dropdownMenuText'>{t('e-magazine')}</Link>
+                                                        <Link to='/photo-gallery' className='dropdownMenuText'>{t('photo-gallery')}</Link>
+                                                        <Link to='/twitter' className='dropdownMenuText'>{t('twitter')}</Link>
+                                                        <Link to='/newspaper-clippings' className='dropdownMenuText'>{t('newspaper-clippings')}</Link>
                                                     </div>
                                                 </div>
                                             )}
@@ -377,25 +377,25 @@ function NavigationBar() {
                                             className='navLink'
                                             onMouseOver={() => setProcurementHovered(true)}
                                             onMouseLeave={() => setProcurementHovered(false)}>
-                                            Procurement<span style={{ color: '#db8204' }}></span>
+                                            {t('procurement')}<span style={{ color: '#db8204' }}></span>
                                             {isProcurementHovered && (
 
-                                                <div className='procurementDropDown'><div style={{height:'1rem', width:'100%', flexOrder:'1'}}></div>
-                                                   <div className='triangle procurementTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
+                                                <div className='procurementDropDown'><div style={{ height: '1rem', width: '100%', flexOrder: '1' }}></div>
+                                                    <div className='triangle procurementTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
                                                     <div className='dropDownMenu'>
-                                                        < Link to="First" className='dropdownMenuText'>Schedule of Rate</Link>
-                                                        < Link className='dropdownMenuText'>Policy</Link>
+                                                        < Link to="First" className='dropdownMenuText'>{t('schedule-of-rate')}</Link>
+                                                        < Link className='dropdownMenuText'>{t('policy')}</Link>
                                                         <Link to="/#tender" href="#"
                                                             onClick={() => {
-                                                                
+
                                                                 TenderScroll();
                                                             }} className='dropdownMenuText'>
-                                                            Tenders
+                                                            {t('tender')}
                                                         </Link>
                                                         < Link to="https://eproc2.bihar.gov.in/EPSV2Web/" className='dropdownMenuText' target="_blank"
-                                                            rel="noopener noreferrer" >e-Procurement</Link>
+                                                            rel="noopener noreferrer" > {t('e-procurement')}  </Link>
                                                         < Link to="https://gem.gov.in/" className='dropdownMenuText' target="_blank"
-                                                            rel="noopener noreferrer" >GeM</Link>
+                                                            rel="noopener noreferrer" >{t('gem')}</Link>
                                                     </div>
                                                 </div>
                                             )}
@@ -406,31 +406,31 @@ function NavigationBar() {
                                         <li className='navLink'
                                             onMouseOver={() => setSTUHovered(true)}
                                             onMouseLeave={() => setSTUHovered(false)}>
-                                            STU<span style={{ color: '#db8204' }}></span>
+                                            {t('stu')}<span style={{ color: '#db8204' }}></span>
                                             {isSTUHovered && (
 
-                                                <div className='stuDropDown'><div style={{height:'1rem', width:'100%', flexOrder:'1'}}></div>
+                                                <div className='stuDropDown'><div style={{ height: '1rem', width: '100%', flexOrder: '1' }}></div>
                                                     <div className='triangle stuTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
                                                     <div className='dropDownMenu'>
                                                         < Link to="First" className='dropdownMenuText'
                                                             onMouseOver={() => setRegulationsHovered(true)}
                                                             onMouseLeave={() => setRegulationsHovered(false)}>
-                                                            Regulations<span style={{ color: '#db8204' }}><GoTriangleRight /></span>
+                                                            {t('regulations')}<span style={{ color: '#db8204' }}><GoTriangleRight /></span>
                                                             {isRegulationsHovered && (
                                                                 <div className='RegulationsDropDown'>
                                                                     <div className='dropDownMenu'>
-                                                                        < Link className='dropdownMenuText'>Grid Code of Bihar</Link>
-                                                                        < Link className='dropdownMenuText'>Grid Code of India</Link>
-                                                                        < Link className='dropdownMenuText'>Electricity Act, 2003</Link>
-                                                                        < Link className='dropdownMenuText'>Other regulation 1</Link>
-                                                                        < Link className='dropdownMenuText'>Other regulation 2</Link>
+                                                                        < Link className='dropdownMenuText'>{t('grid-code-of-bihar')}</Link>
+                                                                        < Link className='dropdownMenuText'>{t('grid-code-of-india')}</Link>
+                                                                        < Link className='dropdownMenuText'>{t('electricity-act-2003')}</Link>
+                                                                        < Link className='dropdownMenuText'>{t('other-regulation 1')}</Link>
+                                                                        < Link className='dropdownMenuText'>{t('other-regulation 2')}</Link>
                                                                     </div>
                                                                 </div>
 
                                                             )}
                                                         </Link>
-                                                        < Link to="/tariff-petitons" className='dropdownMenuText'>Tariff Petitions</Link>
-                                                        < Link className='dropdownMenuText' >Open Access</Link>
+                                                        < Link to="/tariff-petitons" className='dropdownMenuText'> {t('tariff-petitions')}</Link>
+                                                        < Link className='dropdownMenuText' >{t('open-access')}</Link>
                                                     </div>
                                                 </div>
                                             )}
@@ -440,32 +440,32 @@ function NavigationBar() {
                                         <li className='navLink'
                                             onMouseOver={() => setEmployeeHovered(true)}
                                             onMouseLeave={() => setEmployeeHovered(false)}>
-                                            Employee<span style={{ color: '#db8204' }}></span>
+                                            {t('employee')}<span style={{ color: '#db8204' }}></span>
                                             {isEmployeeHovered && (
 
-                                                <div className='employeeDropDown'><div style={{height:'1rem', width:'100%', flexOrder:'1'}}></div>
-                                                   <div className='triangle employeeTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
+                                                <div className='employeeDropDown'><div style={{ height: '1rem', width: '100%', flexOrder: '1' }}></div>
+                                                    <div className='triangle employeeTrianglePosition'><img className='triangleImage' src={triangleImage} alt="" /></div>
                                                     <div className='dropDownMenu'>
-                                                        < Link to="/#office-notification" className='dropdownMenuText'>Office Order</Link>
-                                                        < Link to="/#office-notification" className='dropdownMenuText'>Transfer/Posting</Link>
-                                                        < Link to="/#office-notification" className='dropdownMenuText'>Circulars</Link>
+                                                        < Link to="/#office-notification" className='dropdownMenuText'>{t('office-order')}</Link>
+                                                        < Link to="/#office-notification" className='dropdownMenuText'>{t('transfer-posting')}</Link>
+                                                        < Link to="/#office-notification" className='dropdownMenuText'>{t('circulars')}</Link>
                                                         < Link to="http://pay.bsphcl.org/" className='dropdownMenuText' target="_blank"
-                                                            rel="noopener noreferrer" >Pay & Pension</Link>
+                                                            rel="noopener noreferrer" >{t('pay-and-pension')}</Link>
                                                         < Link to="https://apar.bsphcl.co.in/" className='dropdownMenuText' target="_blank"
-                                                            rel="noopener noreferrer" >APAR</Link>
+                                                            rel="noopener noreferrer" >{t('apar')}</Link>
                                                         < Link to="https://medical.bsphcl.co.in/" className='dropdownMenuText' target="_blank"
-                                                            rel="noopener noreferrer" >Mediclaim</Link>
+                                                            rel="noopener noreferrer" >{t('mediclaim')}</Link>
                                                         < Link to="https://ess.bihar.gov.in:44300/irj/portal" className='dropdownMenuText' target="_blank"
-                                                            rel="noopener noreferrer" >ESS/MSS</Link>
+                                                            rel="noopener noreferrer" >{t('ess/mss')}</Link>
                                                         < Link to="http://125.16.220.20:8077/Form16" className='dropdownMenuText' target="_blank"
-                                                            rel="noopener noreferrer" >Form 16</Link>
+                                                            rel="noopener noreferrer" >{t('form 16')}</Link>
                                                         <Link
                                                             to="https://www.google.com"
-                                                           className='dropdownMenuText'
+                                                            className='dropdownMenuText'
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                         >
-                                                            ERP
+                                                            {t('erp')}
                                                         </Link>
                                                     </div>
                                                 </div>
@@ -479,7 +479,7 @@ function NavigationBar() {
                                             <div>
                                                 {/* Link with the hamburger menu */}
                                                 <Link to="#" className='navLink'>
-                                                        <RxHamburgerMenu onClick={handleShow} />
+                                                    <RxHamburgerMenu onClick={handleShow} />
                                                 </Link>
 
                                                 {/* Dark overlay when the Offcanvas is open */}
@@ -507,35 +507,35 @@ function NavigationBar() {
                                                         <div className="button-container1">
                                                             <div className="row mb-3">
                                                                 <div className="col">
-                                                                    <Button className="custom-button">Career</Button>
+                                                                    <Button className="custom-button">{t('career')}</Button>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <Button className="custom-button">IT Initiatives</Button>
+                                                                    <Button className="custom-button">{t('it-initiatives')}</Button>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <Button className="custom-button">Power Map</Button>
-                                                                </div>
-                                                            </div>
-                                                            <div className="row mb-3">
-                                                                <div className="col">
-                                                                    <Button className="custom-button">Upcoming Infrastructure</Button>
-                                                                </div>
-                                                                <div className="col">
-                                                                    <Button className="custom-button">e-Magazine</Button>
-                                                                </div>
-                                                                <div className="col">
-                                                                    <Button className="custom-button">Photo Gallery</Button>
+                                                                    <Button className="custom-button">{t('power-map')}</Button>
                                                                 </div>
                                                             </div>
                                                             <div className="row mb-3">
                                                                 <div className="col">
-                                                                    <Button className="custom-button">Policy</Button>
+                                                                    <Button className="custom-button">{t('upcoming-infrastructure')}</Button>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <Button className="custom-button">Tenders</Button>
+                                                                    <Button className="custom-button">{t('e-magazine')}</Button>
                                                                 </div>
                                                                 <div className="col">
-                                                                    <Button className="custom-button">GeM</Button>
+                                                                    <Button className="custom-button">{t('photo-gallery')}</Button>
+                                                                </div>
+                                                            </div>
+                                                            <div className="row mb-3">
+                                                                <div className="col">
+                                                                    <Button className="custom-button">{t('policy')}</Button>
+                                                                </div>
+                                                                <div className="col">
+                                                                    <Button className="custom-button">{t('tender')}</Button>
+                                                                </div>
+                                                                <div className="col">
+                                                                    <Button className="custom-button">{t('gem')}</Button>
                                                                 </div>
                                                             </div>
                                                         </div>

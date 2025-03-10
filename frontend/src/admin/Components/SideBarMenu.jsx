@@ -24,6 +24,11 @@ function SidebarMenu() {
     { label: 'Designation Master', path: '/designation-master' },
     { label: 'ATC/TTC', path: '/atc-ttc' },
     { label: 'Map-Section', path: '/map-section' },
+    { label: 'About-Images', path: '/about-images' },
+    { label: 'Transmission', path: '/transmission' },
+    { label: 'Grids', path: '/grids' },
+    { label: 'Upcoming Transmission', path: '/upcoming-transmission' },
+    { label: 'Upcoming Grids', path: '/upcoming-grids' }, 
   ];
 
   return (

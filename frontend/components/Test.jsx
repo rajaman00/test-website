@@ -1,13 +1,21 @@
 import React from 'react'
 import '../components/css/test.css'
 import NewImage from '../public/images/NotificationImages/new.gif'
+import { useTranslation } from 'react-i18next';
 //import whatsnew from '../public/images/NotificationImages/text.gif'
 
 function Test() {
+
+      const { i18n } = useTranslation();
+  
+      const changeLanguage = (language) => {
+          i18n.changeLanguage(language);
+      };
+      const { t } = useTranslation();
   return (
     <div className='test'>
       <div style={{ display: 'flex', position: 'relative', width: '38%' }}>
-        <div style={{ color: "white", backgroundColor: "#0bafec", padding: '4px',display:'flex', alignItems:'center', width: '100%' }}><h5 style={{ marginLeft: '30%' }}>What's New?</h5></div>
+        <div style={{ color: "white", backgroundColor: "#0bafec", padding: '4px',display:'flex', alignItems:'center', width: '100%' }}><h5 style={{ marginLeft: '30%' }}>{t('whats-new')}</h5></div>
         <div className="leftCrossEffect"></div>
       </div>
       <div className="scrolling-text-container">
