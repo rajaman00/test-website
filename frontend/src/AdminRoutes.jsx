@@ -17,6 +17,8 @@ import Transmission from './admin/Transmission.jsx';
 import Grids from './admin/Grids.jsx';
 import UpcomingTransmission from './admin/UpcomingTransmission.jsx';
 import UpcomingGrids from './admin/UpcominGrids.jsx';
+import ATCTTC from './admin/ATCTTC.jsx';
+import TAFM from './admin/TAFM.jsx';
 
 const AdminRoutes = () => {
   return (
@@ -32,7 +34,7 @@ const AdminRoutes = () => {
       <Route path="/admin/photo-gallery" element={<PhotoGallery/> } />
       <Route path="/admin/phone-directory" element={<PhoneDirectory/> } />
 
-<Route path="/admin/designation-master" element={<Designation/> } />
+      <Route path="/admin/designation-master" element={<Designation/> } />
       <Route path="/admin/map-section" element={<MapSection/> } />
 
       <Route path="/admin/about-images" element={<AboutImages/> } />
@@ -40,6 +42,8 @@ const AdminRoutes = () => {
       <Route path="/admin/grids" element={<Grids/> } />
       <Route path="/admin/upcoming-transmission" element={<UpcomingTransmission/> } />
       <Route path="/admin/upcoming-grids" element={<UpcomingGrids/> } />
+      <Route path="/admin/atc-ttc" element={<ATCTTC/> } />
+      <Route path="/admin/tafm" element={<TAFM/> } />
     </Routes>
   );
 };

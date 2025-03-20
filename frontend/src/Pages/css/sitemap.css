@@ -1,0 +1,32 @@
+/* Add this to your CSS file */
+.sitemap-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sitemap-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .sitemap-container ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  .sitemap-container ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sitemap-container ul li strong {
+    font-weight: bold;
+  }
+  
+  .sitemap-container a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .sitemap-container a:hover {
+    text-decoration: underline;
+  }

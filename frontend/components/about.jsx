@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import './css/about.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -35,7 +36,7 @@ function About() {
                     {/* <h3 style={{ textAlign: 'center', fontStyle: 'italic', fontSize: '3rem', fontFamily: 'Brush Script MT, cursive' }}>About Us </h3> */}
 
                     <p style={{ textAlign: 'justify' }}> {t('about-section-text')}             </p>
-                    <br /><br /><button className="view-more-button">{t('view-more')}</button>
+                    <br /><br /><Link to='/company-overview'><button className="view-more-button">{t('view-more')}</button></Link>
                 </div>
 
                 <div className="aboutImage" data-aos="fade-up" data-aos-easing="ease-out-cubic"

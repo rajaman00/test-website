@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { GoTriangleRight } from "react-icons/go";
 // import triangleImage from "../public/images/UpTriangle.png";
 import triangleImage from "../public/images/d1.png";
+import SearchComponent from './SearchComponent'; 
 
 
 //overlay
@@ -53,6 +54,13 @@ function NavigationBar() {
 
     //Employee dropdown
     const [isEmployeeHovered, setEmployeeHovered] = useState(false);
+
+    //Search logic
+    const [searchText, setSearchText] = useState('');
+
+    const handleSearchChange = (query) => {
+        setSearchText(query);
+    };
 
     //voice search
     const [text, setText] = useState('');
@@ -232,17 +240,11 @@ function NavigationBar() {
                         <div className="searchBarAndCompanyLink">
                             {/* ----------------Search Bar------------ */}
                             <div className='searchBar'>
+                           
                                 <span style={{ marginRight: '8px' }}>
                                     <FaSearch />
                                 </span>
-                                <input
-                                    name="voiceText"
-                                    id="voiceText"
-                                    placeholder="Enter Your Text"
-                                    style={{ border: '0px', height: '1.4rem', width: '100%' }}
-                                    value={text}
-                                    onChange={(e) => setText(e.target.value)}
-                                ></input>
+                                 <SearchComponent searchText={searchText} onSearchChange={handleSearchChange} />
                                 <span onClick={voiceSearch}><FaMicrophone /></span>
                             </div>
 

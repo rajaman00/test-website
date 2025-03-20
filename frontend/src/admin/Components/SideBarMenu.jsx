@@ -29,6 +29,7 @@ function SidebarMenu() {
     { label: 'Grids', path: '/grids' },
     { label: 'Upcoming Transmission', path: '/upcoming-transmission' },
     { label: 'Upcoming Grids', path: '/upcoming-grids' }, 
+    { label: 'TAFM', path: '/tafm' },
   ];
 
   return (
